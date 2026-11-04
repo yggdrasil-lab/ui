@@ -1,4 +1,5 @@
 import React from 'react';
+import type { ThemeVariant } from './AppHeader';
 
 export interface BottomNavTabItem {
   id: string;
@@ -8,10 +9,20 @@ export interface BottomNavTabItem {
   badgeDot?: boolean;
 }
 
+const bottomNavVariants: Record<ThemeVariant, string> = {
+  amber: 'text-amber-400 bg-amber-500/10 font-semibold active',
+  blue: 'text-blue-400 bg-blue-500/10 font-semibold active',
+  emerald: 'text-emerald-400 bg-emerald-500/10 font-semibold active',
+  purple: 'text-purple-400 bg-purple-500/10 font-semibold active',
+  slate: 'text-slate-100 bg-slate-700/50 font-semibold active',
+};
+
 export interface BottomNavProps {
   tabs: BottomNavTabItem[];
   activeTab: string;
   onChangeTab: (id: string) => void;
+  variant?: ThemeVariant;
+  activeTabClass?: string;
   hideOnDesktop?: boolean;
   className?: string;
 }
@@ -20,10 +31,13 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   tabs,
   activeTab,
   onChangeTab,
+  variant = 'blue',
+  activeTabClass,
   hideOnDesktop = false,
   className = '',
 }) => {
   const desktopVisibility = hideOnDesktop ? 'block lg:hidden' : 'block';
+  const activeStyle = activeTabClass || bottomNavVariants[variant] || bottomNavVariants.blue;
 
   return (
     <nav
@@ -47,9 +61,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               key={tab.id}
               onClick={() => onChangeTab(tab.id)}
               className={`bottom-nav-item py-2 px-3 rounded-xl flex flex-col items-center space-y-1 transition-all ${
-                isActive
-                  ? 'text-amber-400 bg-amber-500/10 font-semibold active'
-                  : 'text-slate-400 hover:text-slate-200'
+                isActive ? activeStyle : 'text-slate-400 hover:text-slate-200'
               }`}
               aria-label={tab.ariaLabel || tab.label}
             >

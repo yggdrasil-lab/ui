@@ -1,11 +1,28 @@
 import React, { useState } from 'react';
 import { Sparkles } from 'lucide-react';
+import type { ThemeVariant } from '../shell/AppHeader';
 
 export interface MetricHeroBadge {
   label: string;
-  variant?: 'amber' | 'emerald' | 'sky' | 'rose';
+  variant?: 'amber' | 'emerald' | 'sky' | 'rose' | 'blue';
   icon?: React.ReactNode;
 }
+
+const unitVariantColors: Record<ThemeVariant, string> = {
+  amber: 'text-amber-400',
+  blue: 'text-blue-400',
+  emerald: 'text-emerald-400',
+  purple: 'text-purple-400',
+  slate: 'text-slate-300',
+};
+
+const glowVariantColors: Record<ThemeVariant, string> = {
+  amber: 'bg-amber-500/5',
+  blue: 'bg-blue-500/5',
+  emerald: 'bg-emerald-500/5',
+  purple: 'bg-purple-500/5',
+  slate: 'bg-slate-500/5',
+};
 
 export interface MetricHeroProps {
   title: string;
@@ -15,8 +32,11 @@ export interface MetricHeroProps {
   secondaryUnit?: string;
   toggleHint?: string;
   badge?: MetricHeroBadge;
+  variant?: ThemeVariant;
+  unitColor?: string;
   glowColor?: string;
   children?: React.ReactNode;
+  className?: string;
 }
 
 export const MetricHero: React.FC<MetricHeroProps> = ({
@@ -27,31 +47,38 @@ export const MetricHero: React.FC<MetricHeroProps> = ({
   secondaryUnit,
   toggleHint,
   badge,
-  glowColor = 'bg-amber-500/5',
+  variant = 'blue',
+  unitColor,
+  glowColor,
   children,
+  className = '',
 }) => {
   const [showSecondary, setShowSecondary] = useState(false);
 
-  const getBadgeStyle = (variant: MetricHeroBadge['variant'] = 'amber') => {
-    switch (variant) {
+  const getBadgeStyle = (bVariant: MetricHeroBadge['variant'] = 'blue') => {
+    switch (bVariant) {
       case 'emerald':
         return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
       case 'sky':
         return 'bg-sky-500/20 text-sky-300 border-sky-500/40';
       case 'rose':
         return 'bg-rose-500/20 text-rose-300 border-rose-500/40';
-      default:
+      case 'amber':
         return 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+      default:
+        return 'bg-blue-500/20 text-blue-300 border-blue-500/40';
     }
   };
 
   const isToggleable = secondaryValue !== undefined && secondaryUnit !== undefined;
+  const unitClass = unitColor || unitVariantColors[variant] || unitVariantColors.blue;
+  const glowClass = glowColor || glowVariantColors[variant] || glowVariantColors.blue;
 
   return (
-    <div className="bg-card border border-border rounded-2xl p-6 shadow-xl relative overflow-hidden">
-      {/* Glow Effect */}
+    <div className={`bg-card border border-border rounded-2xl p-6 shadow-xl relative overflow-hidden ${className}`}>
+      {/* Background glow */}
       <div
-        className={`absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 ${glowColor} rounded-full blur-3xl pointer-events-none`}
+        className={`absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 ${glowClass} rounded-full blur-3xl pointer-events-none`}
       />
 
       {/* Header and status badge */}
@@ -74,7 +101,7 @@ export const MetricHero: React.FC<MetricHeroProps> = ({
       >
         <div className="text-5xl sm:text-6xl font-black text-slate-50 tracking-tight">
           {showSecondary ? secondaryValue : primaryValue}
-          <span className="text-2xl font-semibold text-amber-400 ml-2">
+          <span className={`text-2xl font-semibold ${unitClass} ml-2`}>
             {showSecondary ? secondaryUnit : primaryUnit}
           </span>
         </div>

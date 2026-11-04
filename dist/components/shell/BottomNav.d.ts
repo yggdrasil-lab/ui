@@ -1,4 +1,5 @@
 import { default as React } from 'react';
+import { ThemeVariant } from './AppHeader';
 export interface BottomNavTabItem {
     id: string;
     label: string;
@@ -10,6 +11,8 @@ export interface BottomNavProps {
     tabs: BottomNavTabItem[];
     activeTab: string;
     onChangeTab: (id: string) => void;
+    variant?: ThemeVariant;
+    activeTabClass?: string;
     hideOnDesktop?: boolean;
     className?: string;
 }
