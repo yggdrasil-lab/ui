@@ -12,6 +12,7 @@ export interface BottomNavProps {
   tabs: BottomNavTabItem[];
   activeTab: string;
   onChangeTab: (id: string) => void;
+  hideOnDesktop?: boolean;
   className?: string;
 }
 
@@ -19,11 +20,14 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   tabs,
   activeTab,
   onChangeTab,
+  hideOnDesktop = false,
   className = '',
 }) => {
+  const desktopVisibility = hideOnDesktop ? 'block lg:hidden' : 'block';
+
   return (
     <nav
-      className={`block lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-card/90 backdrop-blur-md border-t border-border shadow-2xl pb-safe transform-gpu will-change-transform ${className}`}
+      className={`${desktopVisibility} fixed bottom-0 left-0 right-0 z-40 bg-card/90 backdrop-blur-md border-t border-border shadow-2xl pb-safe transform-gpu will-change-transform ${className}`}
       style={{
         WebkitTransform: 'translate3d(0, 0, 0)',
         transform: 'translate3d(0, 0, 0)',
@@ -52,7 +56,10 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               <div className="relative flex items-center justify-center">
                 {tab.icon}
                 {tab.badgeDot && (
-                  <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span
+                    className="active-workout-dot absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+                    title="Workout in progress"
+                  />
                 )}
               </div>
               <span className="text-[10px] truncate max-w-full">{tab.label}</span>
