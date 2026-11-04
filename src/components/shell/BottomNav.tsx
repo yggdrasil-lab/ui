@@ -3,6 +3,7 @@ import React from 'react';
 export interface BottomNavTabItem {
   id: string;
   label: string;
+  ariaLabel?: string;
   icon: React.ReactNode;
   badgeDot?: boolean;
 }
@@ -41,12 +42,12 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             <button
               key={tab.id}
               onClick={() => onChangeTab(tab.id)}
-              className={`py-2 px-3 rounded-xl flex flex-col items-center space-y-1 transition-all ${
+              className={`bottom-nav-item py-2 px-3 rounded-xl flex flex-col items-center space-y-1 transition-all ${
                 isActive
-                  ? 'text-amber-400 bg-amber-500/10 font-semibold'
+                  ? 'text-amber-400 bg-amber-500/10 font-semibold active'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
-              aria-label={tab.label}
+              aria-label={tab.ariaLabel || tab.label}
             >
               <div className="relative flex items-center justify-center">
                 {tab.icon}

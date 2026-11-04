@@ -2,6 +2,7 @@ import { default as React } from 'react';
 export interface BottomNavTabItem {
     id: string;
     label: string;
+    ariaLabel?: string;
     icon: React.ReactNode;
     badgeDot?: boolean;
 }
