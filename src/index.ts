@@ -16,3 +16,7 @@ export * from './components/feedback/MetricHero';
 export * from './components/feedback/StatusBadge';
 export * from './components/feedback/GlassCard';
 export * from './components/feedback/PwaUpdateBanner';
+export * from './components/feedback/SessionExpiredBanner';
+
+// Auth & Session
+export * from './auth';
