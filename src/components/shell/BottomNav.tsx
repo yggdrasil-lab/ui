@@ -43,6 +43,9 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     <nav
       className={`${desktopVisibility} fixed bottom-0 left-0 right-0 z-40 bg-card/90 backdrop-blur-md border-t border-border shadow-2xl pb-safe transform-gpu will-change-transform ${className}`}
       style={{
+        paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom, 0px))',
+        paddingLeft: 'env(safe-area-inset-left, 0px)',
+        paddingRight: 'env(safe-area-inset-right, 0px)',
         WebkitTransform: 'translate3d(0, 0, 0)',
         transform: 'translate3d(0, 0, 0)',
         WebkitBackfaceVisibility: 'hidden',

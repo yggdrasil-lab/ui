@@ -75,7 +75,14 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   const tabActiveStyle = activeTabClass || v.activeTab;
 
   return (
-    <header className={`border-b border-border/60 bg-card/60 backdrop-blur sticky top-0 z-40 w-full ${className}`}>
+    <header
+      className={`border-b border-border/60 bg-card/60 backdrop-blur sticky top-0 z-40 w-full pt-safe ${className}`}
+      style={{
+        paddingTop: 'env(safe-area-inset-top, 0px)',
+        paddingLeft: 'env(safe-area-inset-left, 0px)',
+        paddingRight: 'env(safe-area-inset-right, 0px)',
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
         {/* Brand / Logo */}
         <div className="flex items-center space-x-3">
