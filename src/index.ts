@@ -11,10 +11,12 @@ export * from './components/inputs/TactileKeypad';
 export * from './components/inputs/NumberInputDisplay';
 export * from './components/inputs/FileDropzone';
 export * from './components/inputs/ChipSelector';
+export * from './components/inputs/Button';
 
 // Feedback & Displays
 export * from './components/feedback/Modal';
 export * from './components/feedback/MetricHero';
+export * from './components/feedback/StatCard';
 export * from './components/feedback/StatusBadge';
 export * from './components/feedback/GlassCard';
 export * from './components/feedback/AllowanceProgressBar';
