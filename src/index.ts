@@ -9,12 +9,15 @@ export * from './components/shell/BottomNav';
 // Inputs
 export * from './components/inputs/TactileKeypad';
 export * from './components/inputs/NumberInputDisplay';
+export * from './components/inputs/FileDropzone';
+export * from './components/inputs/ChipSelector';
 
 // Feedback & Displays
 export * from './components/feedback/Modal';
 export * from './components/feedback/MetricHero';
 export * from './components/feedback/StatusBadge';
 export * from './components/feedback/GlassCard';
+export * from './components/feedback/AllowanceProgressBar';
 export * from './components/feedback/PwaUpdateBanner';
 export * from './components/feedback/SessionExpiredBanner';
 
