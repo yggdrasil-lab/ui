@@ -3,6 +3,8 @@ export default {
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
     "./.storybook/**/*.{js,ts,jsx,tsx}",
+    "../kratos/web/src/**/*.{js,ts,jsx,tsx}",
+    "../midas/src/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: 'class',
   theme: {

@@ -4,6 +4,7 @@ import { Loader2 } from 'lucide-react';
 export type ButtonVariant =
   | 'primary'
   | 'amber'
+  | 'blue'
   | 'emerald'
   | 'rose'
   | 'secondary'
@@ -28,6 +29,8 @@ const variantStyles: Record<ButtonVariant, string> = {
     'bg-amber-500 hover:bg-amber-400 active:bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/10 border border-transparent',
   amber:
     'bg-amber-500 hover:bg-amber-400 active:bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/10 border border-transparent',
+  blue:
+    'bg-blue-600 hover:bg-blue-500 active:bg-blue-600 text-white font-bold shadow-md shadow-blue-500/20 border border-transparent',
   emerald:
     'bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/10 border border-transparent',
   rose:

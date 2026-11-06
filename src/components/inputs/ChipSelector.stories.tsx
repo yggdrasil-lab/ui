@@ -47,3 +47,42 @@ export const Emerald: Story = {
     );
   },
 };
+
+export const MultiSelectTags: Story = {
+  render: () => {
+    const [selected, setSelected] = useState<string[]>(['💪 Felt Strong', '⚡ Great Pump']);
+    const tags = ['💪 Felt Strong', '⚡ Great Pump', '🎯 New PR Hit', '🦴 Joint Stiff', '🥱 Low Energy'];
+    return (
+      <div className="max-w-sm">
+        <ChipSelector
+          options={tags}
+          multiSelect
+          selectedValues={selected}
+          onChangeValues={setSelected}
+          variant="purple"
+        />
+      </div>
+    );
+  },
+};
+
+export const KeyValueSegmented: Story = {
+  render: () => {
+    const [energy, setEnergy] = useState('high');
+    return (
+      <div className="w-80">
+        <ChipSelector
+          options={[
+            { value: 'high', label: '⚡ High' },
+            { value: 'normal', label: '😐 Normal' },
+            { value: 'low', label: '🪫 Low' },
+          ]}
+          selected={energy}
+          onChange={setEnergy}
+          variant="blue"
+          equalWidth
+        />
+      </div>
+    );
+  },
+};
