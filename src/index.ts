@@ -13,6 +13,7 @@ export * from './components/inputs/FileDropzone';
 export * from './components/inputs/ChipSelector';
 export * from './components/inputs/OptionCardGroup';
 export * from './components/inputs/RangeSlider';
+export * from './components/inputs/SegmentedControl';
 export * from './components/inputs/Button';
 
 // Feedback & Displays
@@ -20,6 +21,7 @@ export * from './components/feedback/Modal';
 export * from './components/feedback/AiSynthesizerModal';
 export * from './components/feedback/MetricHero';
 export * from './components/feedback/StatCard';
+export * from './components/feedback/SelectableCard';
 export * from './components/feedback/StatusBadge';
 export * from './components/feedback/GlassCard';
 export * from './components/feedback/AllowanceProgressBar';

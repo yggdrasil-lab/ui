@@ -21,8 +21,7 @@
     "build": "tsc --noEmit && vite build && storybook build -o dist-storybook",
     "build:lib": "tsc --noEmit && vite build",
     "build:storybook": "storybook build -o dist-storybook",
-    "preview": "storybook dev -p 6006 --ci",
-    "test:e2e": "playwright test"
+    "preview": "storybook dev -p 6006 --ci"
   },
   "peerDependencies": {
     "react": "^18.3.1",

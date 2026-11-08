@@ -63,7 +63,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             <button
               key={tab.id}
               onClick={() => onChangeTab(tab.id)}
-              className={`bottom-nav-item py-2 px-3 rounded-xl flex flex-col items-center space-y-1 transition-all ${
+              className={`bottom-nav-item py-2 px-1.5 sm:px-3 rounded-xl flex flex-col items-center space-y-1 transition-all ${
                 isActive ? activeStyle : 'text-slate-400 hover:text-slate-200'
               }`}
               aria-label={tab.ariaLabel || tab.label}
@@ -77,7 +77,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   />
                 )}
               </div>
-              <span className="text-[10px] truncate max-w-full">{tab.label}</span>
+              <span className="text-[10px] truncate max-w-full tracking-tight">{tab.label}</span>
             </button>
           );
         })}
