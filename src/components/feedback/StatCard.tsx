@@ -65,7 +65,7 @@ export const StatCard: React.FC<StatCardProps> = ({
             {icon}
           </span>
         )}
-        <span className="truncate uppercase font-medium tracking-wider text-[10px] text-slate-400">
+        <span className="truncate uppercase font-medium tracking-tight sm:tracking-normal text-[10px] sm:text-xs text-slate-400">
           {title}
         </span>
       </div>

@@ -241,7 +241,7 @@ const Y = N("X", [
   return /* @__PURE__ */ e(
     "header",
     {
-      className: `border-b border-border/60 bg-card/60 backdrop-blur sticky top-0 z-40 w-full pt-safe ${x}`,
+      className: `border-b border-border/60 bg-card/95 backdrop-blur-md sticky top-0 z-40 w-full pt-safe ${x}`,
       style: {
         paddingTop: "env(safe-area-inset-top, 0px)",
         paddingLeft: "env(safe-area-inset-left, 0px)",
@@ -311,7 +311,7 @@ const Y = N("X", [
   return /* @__PURE__ */ e(
     "nav",
     {
-      className: `${c} fixed bottom-0 left-0 right-0 z-40 bg-card/90 backdrop-blur-md border-t border-border shadow-2xl pb-safe transform-gpu will-change-transform ${o}`,
+      className: `${c} fixed bottom-0 left-0 right-0 z-40 bg-card/95 backdrop-blur-md border-t border-border shadow-2xl pb-safe transform-gpu will-change-transform ${o}`,
       style: {
         paddingBottom: "max(0.5rem, env(safe-area-inset-bottom, 0px))",
         paddingLeft: "env(safe-area-inset-left, 0px)",
@@ -1002,7 +1002,7 @@ const ye = ({
       children: [
         /* @__PURE__ */ l("div", { className: "flex items-center text-[10px] sm:text-xs text-slate-400 mb-1 truncate", children: [
           a && /* @__PURE__ */ e("span", { className: `mr-1 shrink-0 ${c.icon}`, children: a }),
-          /* @__PURE__ */ e("span", { className: "truncate uppercase font-medium tracking-wider text-[10px] text-slate-400", children: t })
+          /* @__PURE__ */ e("span", { className: "truncate uppercase font-medium tracking-tight sm:tracking-normal text-[10px] sm:text-xs text-slate-400", children: t })
         ] }),
         /* @__PURE__ */ e("div", { className: `text-sm sm:text-base font-bold truncate ${c.value}`, children: r }),
         s && /* @__PURE__ */ e("div", { className: "text-[10px] sm:text-xs text-slate-400 truncate mt-0.5", children: s })
