@@ -76,7 +76,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
 
   return (
     <header
-      className={`border-b border-border/60 bg-card/60 backdrop-blur sticky top-0 z-40 w-full pt-safe ${className}`}
+      className={`border-b border-border/60 bg-card/95 backdrop-blur-md sticky top-0 z-40 w-full pt-safe ${className}`}
       style={{
         paddingTop: 'env(safe-area-inset-top, 0px)',
         paddingLeft: 'env(safe-area-inset-left, 0px)',
