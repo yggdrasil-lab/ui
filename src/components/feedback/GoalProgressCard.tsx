@@ -1,4 +1,5 @@
 import React from 'react';
+import { THEME_GOAL_GRADIENT, type ThemeVariant } from '../../theme/variants';
 
 export interface GoalProgressCardProps {
   eyebrow: string;
@@ -11,7 +12,7 @@ export interface GoalProgressCardProps {
   startLabel: string;
   centerLabel?: string;
   targetLabel: string;
-  variant?: 'blue' | 'amber' | 'emerald' | 'purple';
+  variant?: ThemeVariant;
   className?: string;
 }
 
@@ -30,20 +31,7 @@ export const GoalProgressCard: React.FC<GoalProgressCardProps> = ({
   className = '',
 }) => {
   const clamped = Math.min(100, Math.max(0, Math.round(progressPercent)));
-
-  const eyebrowColor =
-    variant === 'amber'
-      ? 'text-amber-400'
-      : variant === 'emerald'
-      ? 'text-emerald-400'
-      : variant === 'purple'
-      ? 'text-purple-400'
-      : 'text-sky-400';
-
-  const barGradient =
-    variant === 'amber'
-      ? 'from-amber-500 to-emerald-400'
-      : 'from-blue-500 to-emerald-400';
+  const goalStyle = THEME_GOAL_GRADIENT[variant] || THEME_GOAL_GRADIENT.blue;
 
   return (
     <div
@@ -51,7 +39,7 @@ export const GoalProgressCard: React.FC<GoalProgressCardProps> = ({
     >
       <div className="flex justify-between items-center mb-2">
         <div>
-          <span className={`text-xs font-bold uppercase tracking-wider ${eyebrowColor}`}>
+          <span className={`text-xs font-bold uppercase tracking-wider ${goalStyle.eyebrow}`}>
             {eyebrow}
           </span>
           <div className="text-xl font-bold text-slate-100 mt-0.5 flex items-baseline gap-1.5">
@@ -79,7 +67,7 @@ export const GoalProgressCard: React.FC<GoalProgressCardProps> = ({
       {/* Progress Bar */}
       <div className="h-2.5 w-full bg-background/80 rounded-full overflow-hidden my-3 border border-border/50">
         <div
-          className={`h-full bg-gradient-to-r ${barGradient} rounded-full transition-all duration-500`}
+          className={`h-full bg-gradient-to-r ${goalStyle.bar} rounded-full transition-all duration-500`}
           style={{ width: `${clamped}%` }}
         />
       </div>

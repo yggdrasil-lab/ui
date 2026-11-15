@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { Modal } from './Modal';
 import { Button } from '../inputs/Button';
+import {
+  THEME_BUTTON_VARIANT,
+  THEME_CALLOUT_BOX,
+  THEME_FOCUS_BORDER,
+  type ThemeVariant,
+} from '../../theme/variants';
 
 export interface AiSynthesizerPillar {
   label: string;
@@ -22,7 +28,7 @@ export interface AiSynthesizerModalProps {
   submitLabel?: string;
   submittingLabel?: string;
   errorFallbackMessage?: string;
-  variant?: 'blue' | 'amber' | 'emerald' | 'purple';
+  variant?: ThemeVariant;
   onSynthesize: (customContext?: string) => Promise<void>;
 }
 
@@ -62,11 +68,9 @@ export const AiSynthesizerModal: React.FC<AiSynthesizerModalProps> = ({
     }
   };
 
-  const isAmber = variant === 'amber';
-  const calloutBorder = isAmber
-    ? 'bg-amber-500/10 border-amber-500/25'
-    : 'bg-blue-500/10 border-blue-500/25';
-  const calloutHeaderColor = isAmber ? 'text-amber-300' : 'text-blue-300';
+  const calloutStyle = THEME_CALLOUT_BOX[variant] || THEME_CALLOUT_BOX.blue;
+  const focusBorder = THEME_FOCUS_BORDER[variant] || THEME_FOCUS_BORDER.blue;
+  const submitButtonVariant = THEME_BUTTON_VARIANT[variant] || THEME_BUTTON_VARIANT.blue;
 
   return (
     <Modal
@@ -80,9 +84,9 @@ export const AiSynthesizerModal: React.FC<AiSynthesizerModalProps> = ({
       <div className="space-y-4">
         {/* Research Framework Pill */}
         {(citationTitle || pillars.length > 0) && (
-          <div className={`rounded-xl border p-3 text-xs ${calloutBorder}`}>
+          <div className={`rounded-xl border p-3 text-xs ${calloutStyle.container}`}>
             {citationTitle && (
-              <div className={`font-semibold mb-1.5 flex items-center gap-1.5 ${calloutHeaderColor}`}>
+              <div className={`font-semibold mb-1.5 flex items-center gap-1.5 ${calloutStyle.header}`}>
                 <span>{citationIcon}</span>
                 <span>{citationTitle}</span>
               </div>
@@ -110,7 +114,7 @@ export const AiSynthesizerModal: React.FC<AiSynthesizerModalProps> = ({
             onChange={(e) => setCustomContext(e.target.value)}
             disabled={isBusy}
             placeholder={inputPlaceholder}
-            className="w-full bg-background/80 border border-border rounded-xl px-3 py-2 text-slate-100 text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500 resize-y"
+            className={`w-full bg-background/80 border border-border rounded-xl px-3 py-2 text-slate-100 text-xs placeholder-slate-500 focus:outline-none ${focusBorder} resize-y`}
           />
         </div>
 
@@ -131,7 +135,7 @@ export const AiSynthesizerModal: React.FC<AiSynthesizerModalProps> = ({
             Cancel
           </Button>
           <Button
-            variant={isAmber ? 'amber' : 'blue'}
+            variant={submitButtonVariant}
             size="md"
             loading={isBusy}
             loadingText={submittingLabel}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Delete } from 'lucide-react';
-import type { ThemeVariant } from '../shell/AppHeader';
+import { THEME_ACTION_TEXT, type ThemeVariant } from '../../theme/variants';
 
 export interface TactileKeypadProps {
   value: string;
@@ -12,14 +12,6 @@ export interface TactileKeypadProps {
   allowDecimals?: boolean;
   className?: string;
 }
-
-const actionVariantColors: Record<ThemeVariant, string> = {
-  amber: 'text-amber-400 hover:text-amber-300',
-  blue: 'text-blue-400 hover:text-blue-300',
-  emerald: 'text-emerald-400 hover:text-emerald-300',
-  purple: 'text-purple-400 hover:text-purple-300',
-  slate: 'text-slate-300 hover:text-slate-100',
-};
 
 export const TactileKeypad: React.FC<TactileKeypadProps> = ({
   value,
@@ -66,7 +58,7 @@ export const TactileKeypad: React.FC<TactileKeypadProps> = ({
     }
   };
 
-  const actionStyle = actionColor || actionVariantColors[variant] || actionVariantColors.blue;
+  const actionStyle = actionColor || THEME_ACTION_TEXT[variant] || THEME_ACTION_TEXT.blue;
   const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', allowDecimals ? '.' : '', '0'];
 
   return (

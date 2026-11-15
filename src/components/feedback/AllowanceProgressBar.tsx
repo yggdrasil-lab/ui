@@ -1,10 +1,57 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import type { ThemeVariant } from '../shell/AppHeader';
+import type { ThemeVariant } from '../../theme/variants';
 
 export interface AllowanceDeltaBadge {
   label: string;
   isPositive: boolean;
+}
+
+export interface AllowanceThresholdState {
+  percent: number;
+  remaining: number;
+  barColor: string;
+  percentTextColor: string;
+}
+
+/**
+ * Pure threshold calculation for allowance progress bars:
+ * - <= 70%: healthy (emerald)
+ * - 71-90%: warning (amber)
+ * - > 90%: critical (rose)
+ */
+export function getAllowanceThresholdState(
+  currentValue: number,
+  targetValue: number
+): AllowanceThresholdState {
+  const safeTarget = targetValue > 0 ? targetValue : 1;
+  const percent = Math.min(100, Math.max(0, Math.round((currentValue / safeTarget) * 100)));
+  const remaining = Math.max(0, targetValue - currentValue);
+
+  if (percent > 90) {
+    return {
+      percent,
+      remaining,
+      barColor: 'bg-rose-500',
+      percentTextColor: 'text-rose-400 font-semibold',
+    };
+  }
+
+  if (percent > 70) {
+    return {
+      percent,
+      remaining,
+      barColor: 'bg-amber-400',
+      percentTextColor: 'text-amber-400 font-semibold',
+    };
+  }
+
+  return {
+    percent,
+    remaining,
+    barColor: 'bg-emerald-400',
+    percentTextColor: 'text-slate-400 font-medium',
+  };
 }
 
 export interface AllowanceProgressBarProps {
@@ -33,21 +80,10 @@ export const AllowanceProgressBar: React.FC<AllowanceProgressBarProps> = ({
   action,
   className = '',
 }) => {
-  const percent = Math.min(100, Math.round((currentValue / (targetValue || 1)) * 100));
-  const remaining = Math.max(0, targetValue - currentValue);
-
-  // Progressive color threshold: <70% healthy (emerald), 70-90% warning (amber), >90% critical (rose)
-  const getProgressBarColor = () => {
-    if (percent > 90) return 'bg-rose-500';
-    if (percent > 70) return 'bg-amber-400';
-    return 'bg-emerald-400';
-  };
-
-  const getPercentTextColor = () => {
-    if (percent > 90) return 'text-rose-400 font-semibold';
-    if (percent > 70) return 'text-amber-400 font-semibold';
-    return 'text-slate-400 font-medium';
-  };
+  const { percent, remaining, barColor, percentTextColor } = getAllowanceThresholdState(
+    currentValue,
+    targetValue
+  );
 
   return (
     <div className={`bg-card border border-border rounded-2xl p-5 shadow-lg ${className}`}>
@@ -74,13 +110,13 @@ export const AllowanceProgressBar: React.FC<AllowanceProgressBarProps> = ({
           <span className="text-slate-400">
             Spent <strong className="text-slate-200">{currencyPrefix}{Math.round(currentValue).toLocaleString('en-NZ')}</strong> of {currencyPrefix}{Math.round(targetValue).toLocaleString('en-NZ')}
           </span>
-          <span className={getPercentTextColor()}>
+          <span className={percentTextColor}>
             {percent}%
           </span>
         </div>
         <div className="w-full h-2.5 bg-background rounded-full overflow-hidden border border-border/50">
           <div
-            className={`h-full transition-all duration-500 rounded-full ${getProgressBarColor()}`}
+            className={`h-full transition-all duration-500 rounded-full ${barColor}`}
             style={{ width: `${percent}%` }}
           />
         </div>

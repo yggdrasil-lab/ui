@@ -1,41 +1,19 @@
 import React from 'react';
 import { RefreshCw } from 'lucide-react';
+import {
+  THEME_ACTIVE_TAB,
+  THEME_BRAND_BADGE,
+  THEME_TEXT_COLORS,
+  type ThemeVariant,
+} from '../../theme/variants';
+
+export type { ThemeVariant };
 
 export interface HeaderTabItem {
   id: string;
   label: string;
   icon?: React.ReactNode;
 }
-
-export type ThemeVariant = 'amber' | 'blue' | 'emerald' | 'purple' | 'slate';
-
-const variantClasses: Record<ThemeVariant, { brand: string; activeTab: string; spinner: string }> = {
-  amber: {
-    brand: 'bg-amber-500 text-slate-950',
-    activeTab: 'bg-amber-500 text-slate-950 shadow',
-    spinner: 'text-amber-400',
-  },
-  blue: {
-    brand: 'bg-blue-600 text-white',
-    activeTab: 'bg-blue-600 text-white shadow',
-    spinner: 'text-blue-400',
-  },
-  emerald: {
-    brand: 'bg-emerald-500 text-slate-950',
-    activeTab: 'bg-emerald-500 text-slate-950 shadow',
-    spinner: 'text-emerald-400',
-  },
-  purple: {
-    brand: 'bg-purple-600 text-white',
-    activeTab: 'bg-purple-600 text-white shadow',
-    spinner: 'text-purple-400',
-  },
-  slate: {
-    brand: 'bg-slate-700 text-white',
-    activeTab: 'bg-slate-200 text-slate-950 shadow',
-    spinner: 'text-slate-300',
-  },
-};
 
 export interface AppHeaderProps {
   brandInitial?: string;
@@ -70,9 +48,9 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   actions,
   className = '',
 }) => {
-  const v = variantClasses[variant] || variantClasses.blue;
-  const brandBg = brandColor || v.brand;
-  const tabActiveStyle = activeTabClass || v.activeTab;
+  const brandBg = brandColor || THEME_BRAND_BADGE[variant] || THEME_BRAND_BADGE.blue;
+  const tabActiveStyle = activeTabClass || THEME_ACTIVE_TAB[variant] || THEME_ACTIVE_TAB.blue;
+  const spinnerColor = THEME_TEXT_COLORS[variant] || THEME_TEXT_COLORS.blue;
 
   return (
     <header
@@ -137,7 +115,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               data-testid="refresh-button"
             >
               <RefreshCw
-                className={`w-3.5 h-3.5 ${isRefreshing ? `animate-spin ${v.spinner}` : ''}`}
+                className={`w-3.5 h-3.5 ${isRefreshing ? `animate-spin ${spinnerColor}` : ''}`}
               />
             </button>
           )}

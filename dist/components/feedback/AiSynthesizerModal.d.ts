@@ -1,4 +1,5 @@
 import { default as React } from 'react';
+import { ThemeVariant } from '../../theme/variants';
 export interface AiSynthesizerPillar {
     label: string;
     description: string;
@@ -18,7 +19,7 @@ export interface AiSynthesizerModalProps {
     submitLabel?: string;
     submittingLabel?: string;
     errorFallbackMessage?: string;
-    variant?: 'blue' | 'amber' | 'emerald' | 'purple';
+    variant?: ThemeVariant;
     onSynthesize: (customContext?: string) => Promise<void>;
 }
 export declare const AiSynthesizerModal: React.FC<AiSynthesizerModalProps>;

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ThemeVariant } from './AppHeader';
+import { THEME_BOTTOM_NAV_ACTIVE, type ThemeVariant } from '../../theme/variants';
 
 export interface BottomNavTabItem {
   id: string;
@@ -8,14 +8,6 @@ export interface BottomNavTabItem {
   icon: React.ReactNode;
   badgeDot?: boolean;
 }
-
-const bottomNavVariants: Record<ThemeVariant, string> = {
-  amber: 'text-amber-400 bg-amber-500/10 font-semibold active',
-  blue: 'text-blue-400 bg-blue-500/10 font-semibold active',
-  emerald: 'text-emerald-400 bg-emerald-500/10 font-semibold active',
-  purple: 'text-purple-400 bg-purple-500/10 font-semibold active',
-  slate: 'text-slate-100 bg-slate-700/50 font-semibold active',
-};
 
 export interface BottomNavProps {
   tabs: BottomNavTabItem[];
@@ -37,7 +29,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   className = '',
 }) => {
   const desktopVisibility = hideOnDesktop ? 'block lg:hidden' : 'block';
-  const activeStyle = activeTabClass || bottomNavVariants[variant] || bottomNavVariants.blue;
+  const activeStyle =
+    activeTabClass || THEME_BOTTOM_NAV_ACTIVE[variant] || THEME_BOTTOM_NAV_ACTIVE.blue;
 
   return (
     <nav

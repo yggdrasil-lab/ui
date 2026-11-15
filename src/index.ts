@@ -1,6 +1,9 @@
 // Styles
 import './styles/globals.css';
 
+// Theme & Variants
+export * from './theme/variants';
+
 // Shell components
 export * from './components/shell/AppShell';
 export * from './components/shell/AppHeader';
@@ -9,6 +12,8 @@ export * from './components/shell/BottomNav';
 // Inputs
 export * from './components/inputs/TactileKeypad';
 export * from './components/inputs/NumberInputDisplay';
+export * from './components/inputs/NumericKeypadModal';
+export * from './components/inputs/SearchInput';
 export * from './components/inputs/FileDropzone';
 export * from './components/inputs/ChipSelector';
 export * from './components/inputs/OptionCardGroup';
@@ -26,10 +31,20 @@ export * from './components/feedback/StatusBadge';
 export * from './components/feedback/GlassCard';
 export * from './components/feedback/AllowanceProgressBar';
 export * from './components/feedback/GoalProgressCard';
+export * from './components/feedback/MultiSegmentBar';
+export * from './components/feedback/SummaryMetricGrid';
+export * from './components/feedback/EmptyState';
+export * from './components/feedback/LoadingState';
+export * from './components/feedback/ConfirmActionBox';
 export * from './components/feedback/AlertBanner';
 export * from './components/feedback/CollapsibleSection';
 export * from './components/feedback/PwaUpdateBanner';
 export * from './components/feedback/SessionExpiredBanner';
+
+// Hooks & Utilities
+export * from './hooks/usePwaUpdate';
+export * from './utils/telemetry';
+export * from './utils/format';
 
 // Auth & Session
 export * from './auth';

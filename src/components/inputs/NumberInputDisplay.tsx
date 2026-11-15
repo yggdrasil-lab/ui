@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ThemeVariant } from '../shell/AppHeader';
+import { THEME_VALUE_COLORS, type ThemeVariant } from '../../theme/variants';
 
 export interface NumberInputDisplayProps {
   label: string;
@@ -10,14 +10,6 @@ export interface NumberInputDisplayProps {
   className?: string;
 }
 
-const valueVariantColors: Record<ThemeVariant, string> = {
-  amber: 'text-amber-400',
-  blue: 'text-blue-400',
-  emerald: 'text-emerald-400',
-  purple: 'text-purple-400',
-  slate: 'text-slate-100',
-};
-
 export const NumberInputDisplay: React.FC<NumberInputDisplayProps> = ({
   label,
   value,
@@ -26,7 +18,7 @@ export const NumberInputDisplay: React.FC<NumberInputDisplayProps> = ({
   valueColor,
   className = '',
 }) => {
-  const textColor = valueColor || valueVariantColors[variant] || valueVariantColors.blue;
+  const textColor = valueColor || THEME_VALUE_COLORS[variant] || THEME_VALUE_COLORS.blue;
 
   return (
     <div className={`p-4 bg-background/80 rounded-2xl border border-border/80 text-center ${className}`}>

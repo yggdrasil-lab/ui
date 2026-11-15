@@ -1,5 +1,5 @@
 import { default as React } from 'react';
-import { ThemeVariant } from '../shell/AppHeader';
+import { ThemeVariant } from '../../theme/variants';
 export interface SelectableCardProps {
     title: string;
     subtitle?: string;

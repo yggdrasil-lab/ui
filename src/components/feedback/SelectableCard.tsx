@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ThemeVariant } from '../shell/AppHeader';
+import { THEME_RING_SELECTED, type ThemeVariant } from '../../theme/variants';
 
 export interface SelectableCardProps {
   title: string;
@@ -17,14 +17,6 @@ export interface SelectableCardProps {
   'data-testid'?: string;
 }
 
-const variantSelectedStyles: Record<ThemeVariant, string> = {
-  amber: 'bg-amber-500/10 border-amber-500/40 shadow-md ring-1 ring-amber-500/30',
-  blue: 'bg-blue-500/10 border-blue-500/40 shadow-md ring-1 ring-blue-500/30',
-  emerald: 'bg-emerald-500/10 border-emerald-500/40 shadow-md ring-1 ring-emerald-500/30',
-  purple: 'bg-purple-500/10 border-purple-500/40 shadow-md ring-1 ring-purple-500/30',
-  slate: 'bg-slate-800/50 border-slate-600 shadow-md ring-1 ring-slate-500/30',
-};
-
 export const SelectableCard: React.FC<SelectableCardProps> = ({
   title,
   subtitle,
@@ -40,7 +32,7 @@ export const SelectableCard: React.FC<SelectableCardProps> = ({
   className = '',
   'data-testid': testId,
 }) => {
-  const selectedStyle = variantSelectedStyles[variant] || variantSelectedStyles.amber;
+  const selectedStyle = THEME_RING_SELECTED[variant] || THEME_RING_SELECTED.amber;
 
   const trendColor =
     subvalueTrend === 'positive'

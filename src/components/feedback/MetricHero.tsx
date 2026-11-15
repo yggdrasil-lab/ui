@@ -1,28 +1,16 @@
 import React, { useState } from 'react';
 import { Sparkles } from 'lucide-react';
-import type { ThemeVariant } from '../shell/AppHeader';
+import {
+  THEME_GLOW_BG,
+  THEME_TEXT_COLORS,
+  type ThemeVariant,
+} from '../../theme/variants';
 
 export interface MetricHeroBadge {
   label: string;
   variant?: 'amber' | 'emerald' | 'sky' | 'rose' | 'blue';
   icon?: React.ReactNode;
 }
-
-const unitVariantColors: Record<ThemeVariant, string> = {
-  amber: 'text-amber-400',
-  blue: 'text-blue-400',
-  emerald: 'text-emerald-400',
-  purple: 'text-purple-400',
-  slate: 'text-slate-300',
-};
-
-const glowVariantColors: Record<ThemeVariant, string> = {
-  amber: 'bg-amber-500/5',
-  blue: 'bg-blue-500/5',
-  emerald: 'bg-emerald-500/5',
-  purple: 'bg-purple-500/5',
-  slate: 'bg-slate-500/5',
-};
 
 export interface MetricHeroProps {
   title: string;
@@ -71,8 +59,8 @@ export const MetricHero: React.FC<MetricHeroProps> = ({
   };
 
   const isToggleable = secondaryValue !== undefined && secondaryUnit !== undefined;
-  const unitClass = unitColor || unitVariantColors[variant] || unitVariantColors.blue;
-  const glowClass = glowColor || glowVariantColors[variant] || glowVariantColors.blue;
+  const unitClass = unitColor || THEME_TEXT_COLORS[variant] || THEME_TEXT_COLORS.blue;
+  const glowClass = glowColor || THEME_GLOW_BG[variant] || THEME_GLOW_BG.blue;
 
   return (
     <div className={`bg-card border border-border rounded-2xl p-6 shadow-xl relative overflow-hidden ${className}`}>
