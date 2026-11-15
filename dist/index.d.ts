@@ -36,4 +36,5 @@ export * from './hooks/useRestTimer';
 export * from './utils/telemetry';
 export * from './utils/format';
 export * from './utils/viewport';
+export * from './utils/cacheReset';
 export * from './auth';

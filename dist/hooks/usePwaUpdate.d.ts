@@ -13,5 +13,6 @@ export interface UsePwaUpdateResult {
     checkForUpdates: () => Promise<void>;
     applyUpdate: () => Promise<void>;
     dismissUpdate: () => void;
+    hardReset: () => Promise<void>;
 }
 export declare function usePwaUpdate(options?: UsePwaUpdateOptions): UsePwaUpdateResult;

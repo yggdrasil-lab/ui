@@ -6,6 +6,7 @@ import {
   THEME_TEXT_COLORS,
   type ThemeVariant,
 } from '../../theme/variants';
+import { clearBrowserCaches } from '../../utils/cacheReset';
 
 export type { ThemeVariant };
 
@@ -108,7 +109,10 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
 
           {onRefresh && (
             <button
-              onClick={onRefresh}
+              onClick={() => {
+                void clearBrowserCaches();
+                onRefresh();
+              }}
               className="p-2 rounded-xl bg-background/80 hover:bg-background border border-border text-slate-400 hover:text-slate-200 active:scale-95 transition-all"
               title="Refresh data"
               aria-label="Refresh data"
