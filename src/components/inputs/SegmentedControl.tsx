@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ThemeVariant } from '../shell/AppHeader';
+import { THEME_SEGMENT_ACTIVE, type ThemeVariant } from '../../theme/variants';
 
 export interface SegmentedControlOption<T extends string = string> {
   id: T;
@@ -19,14 +19,6 @@ export interface SegmentedControlProps<T extends string = string> {
   idPrefix?: string;
 }
 
-const variantActiveStyles: Record<ThemeVariant, string> = {
-  amber: 'bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-sm',
-  blue: 'bg-blue-500/20 text-blue-300 border-blue-500/40 shadow-sm',
-  emerald: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-sm',
-  purple: 'bg-purple-500/20 text-purple-300 border-purple-500/40 shadow-sm',
-  slate: 'bg-slate-700/50 text-slate-100 border-slate-600 shadow-sm',
-};
-
 const sizeStyles = {
   xs: 'px-2.5 py-1 text-xs',
   sm: 'px-3 py-1.5 text-xs',
@@ -43,7 +35,7 @@ export function SegmentedControl<T extends string = string>({
   className = '',
   idPrefix = 'segmented',
 }: SegmentedControlProps<T>) {
-  const activeClass = variantActiveStyles[variant] || variantActiveStyles.amber;
+  const activeClass = THEME_SEGMENT_ACTIVE[variant] || THEME_SEGMENT_ACTIVE.amber;
   const sizeClass = sizeStyles[size] || sizeStyles.xs;
 
   return (

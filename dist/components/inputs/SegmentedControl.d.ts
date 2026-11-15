@@ -1,5 +1,5 @@
 import { default as React } from 'react';
-import { ThemeVariant } from '../shell/AppHeader';
+import { ThemeVariant } from '../../theme/variants';
 export interface SegmentedControlOption<T extends string = string> {
     id: T;
     label: string;

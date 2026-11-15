@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ThemeVariant } from '../shell/AppHeader';
+import type { ThemeVariant } from '../../theme/variants';
 
 export type ChipOptionItem = string | { value: string; label: string };
 export type ChipVariant = ThemeVariant | 'rose';

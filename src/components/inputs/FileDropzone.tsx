@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { FileText, X } from 'lucide-react';
-import type { ThemeVariant } from '../shell/AppHeader';
+import {
+  THEME_DROPZONE_ACTIVE,
+  THEME_TEXT_COLORS,
+  type ThemeVariant,
+} from '../../theme/variants';
 
 export interface FileDropzoneProps {
   file: File | null;
@@ -12,22 +16,6 @@ export interface FileDropzoneProps {
   className?: string;
   children?: React.ReactNode;
 }
-
-const activeBorderVariants: Record<ThemeVariant, string> = {
-  amber: 'border-amber-500 bg-amber-500/5',
-  blue: 'border-blue-500 bg-blue-500/5',
-  emerald: 'border-emerald-500 bg-emerald-500/5',
-  purple: 'border-purple-500 bg-purple-500/5',
-  slate: 'border-slate-500 bg-slate-500/5',
-};
-
-const textHighlightVariants: Record<ThemeVariant, string> = {
-  amber: 'text-amber-400',
-  blue: 'text-blue-400',
-  emerald: 'text-emerald-400',
-  purple: 'text-purple-400',
-  slate: 'text-slate-300',
-};
 
 export const FileDropzone: React.FC<FileDropzoneProps> = ({
   file,
@@ -67,8 +55,8 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
     }
   };
 
-  const activeBorder = activeBorderVariants[variant] || activeBorderVariants.amber;
-  const highlightClass = textHighlightVariants[variant] || textHighlightVariants.amber;
+  const activeBorder = THEME_DROPZONE_ACTIVE[variant] || THEME_DROPZONE_ACTIVE.amber;
+  const highlightClass = THEME_TEXT_COLORS[variant] || THEME_TEXT_COLORS.amber;
 
   return (
     <div

@@ -1,4 +1,5 @@
 import { default as React } from 'react';
+import { ThemeVariant } from '../../theme/variants';
 export interface GoalProgressCardProps {
     eyebrow: string;
     currentValueLabel: string;
@@ -10,7 +11,7 @@ export interface GoalProgressCardProps {
     startLabel: string;
     centerLabel?: string;
     targetLabel: string;
-    variant?: 'blue' | 'amber' | 'emerald' | 'purple';
+    variant?: ThemeVariant;
     className?: string;
 }
 export declare const GoalProgressCard: React.FC<GoalProgressCardProps>;

@@ -1,10 +1,11 @@
 import { default as React } from 'react';
+import { ThemeVariant } from '../../theme/variants';
+export type { ThemeVariant };
 export interface HeaderTabItem {
     id: string;
     label: string;
     icon?: React.ReactNode;
 }
-export type ThemeVariant = 'amber' | 'blue' | 'emerald' | 'purple' | 'slate';
 export interface AppHeaderProps {
     brandInitial?: string;
     brandIcon?: React.ReactNode;

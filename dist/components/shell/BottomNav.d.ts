@@ -1,5 +1,5 @@
 import { default as React } from 'react';
-import { ThemeVariant } from './AppHeader';
+import { ThemeVariant } from '../../theme/variants';
 export interface BottomNavTabItem {
     id: string;
     label: string;
