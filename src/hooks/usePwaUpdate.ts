@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { clearBrowserCaches, resetClientCacheAndReload } from '../utils/cacheReset';
 
 export const SW_UPDATE_POLL_INTERVAL_MS = 60 * 60 * 1000;
 
@@ -17,6 +18,7 @@ export interface UsePwaUpdateResult {
   checkForUpdates: () => Promise<void>;
   applyUpdate: () => Promise<void>;
   dismissUpdate: () => void;
+  hardReset: () => Promise<void>;
 }
 
 export function usePwaUpdate(options: UsePwaUpdateOptions = {}): UsePwaUpdateResult {
@@ -144,6 +146,7 @@ export function usePwaUpdate(options: UsePwaUpdateOptions = {}): UsePwaUpdateRes
 
   const applyUpdate = useCallback(async () => {
     updateRequestedRef.current = true;
+    await clearBrowserCaches();
     const reg = await getRegistration();
     if (reg?.waiting) {
       reg.waiting.postMessage({ type: 'SKIP_WAITING' });
@@ -159,8 +162,13 @@ export function usePwaUpdate(options: UsePwaUpdateOptions = {}): UsePwaUpdateRes
     setNeedRefresh(false);
   }, [setNeedRefresh]);
 
+  const hardReset = useCallback(async () => {
+    await resetClientCacheAndReload();
+  }, []);
+
   useEffect(() => {
     if (typeof window === 'undefined' || typeof document === 'undefined') return;
+    void clearBrowserCaches();
     void triggerSilentUpdateCheck();
 
     const onVisibilityChange = () => {
@@ -205,5 +213,6 @@ export function usePwaUpdate(options: UsePwaUpdateOptions = {}): UsePwaUpdateRes
     checkForUpdates,
     applyUpdate,
     dismissUpdate,
+    hardReset,
   };
 }
