@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
+import { resetMobileViewportZoom } from '../../utils/viewport';
 
 export interface ModalProps {
   isOpen: boolean;
@@ -23,16 +24,32 @@ export const Modal: React.FC<ModalProps> = ({
   children,
   className = '',
 }) => {
+  const wasOpenRef = useRef<boolean>(false);
+
   useEffect(() => {
     if (isOpen) {
+      wasOpenRef.current = true;
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
+      if (wasOpenRef.current) {
+        wasOpenRef.current = false;
+        resetMobileViewportZoom();
+      }
     }
     return () => {
       document.body.style.overflow = '';
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    return () => {
+      if (wasOpenRef.current) {
+        wasOpenRef.current = false;
+        resetMobileViewportZoom();
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
