@@ -114,7 +114,7 @@ export const AiSynthesizerModal: React.FC<AiSynthesizerModalProps> = ({
             onChange={(e) => setCustomContext(e.target.value)}
             disabled={isBusy}
             placeholder={inputPlaceholder}
-            className={`w-full bg-background/80 border border-border rounded-xl px-3 py-2 text-slate-100 text-xs placeholder-slate-500 focus:outline-none ${focusBorder} resize-y`}
+            className={`w-full bg-background/80 border border-border rounded-xl px-3 py-2 text-slate-100 text-base sm:text-xs placeholder-slate-500 focus:outline-none ${focusBorder} resize-y`}
           />
         </div>
 

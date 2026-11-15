@@ -33,7 +33,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           data-testid={testId}
-          className={`w-full pl-9 pr-8 py-2 bg-background border border-border rounded-xl text-xs sm:text-sm text-slate-200 placeholder-slate-500 focus:outline-none ${focusBorder} transition-colors`}
+          className={`w-full pl-9 pr-8 py-2 bg-background border border-border rounded-xl text-base sm:text-xs text-slate-200 placeholder-slate-500 focus:outline-none ${focusBorder} transition-colors`}
         />
         {value.length > 0 && (
           <button

@@ -40,11 +40,14 @@ export * from './components/feedback/AlertBanner';
 export * from './components/feedback/CollapsibleSection';
 export * from './components/feedback/PwaUpdateBanner';
 export * from './components/feedback/SessionExpiredBanner';
+export * from './components/feedback/RestTimerBar';
 
 // Hooks & Utilities
 export * from './hooks/usePwaUpdate';
+export * from './hooks/useRestTimer';
 export * from './utils/telemetry';
 export * from './utils/format';
+export * from './utils/viewport';
 
 // Auth & Session
 export * from './auth';
