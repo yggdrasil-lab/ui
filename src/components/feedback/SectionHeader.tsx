@@ -48,8 +48,8 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   const iconWrapClass = size === 'md' ? 'p-2.5 rounded-xl border' : 'p-1.5 rounded-lg border';
 
   return (
-    <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${className}`}>
-      <div className="flex items-center space-x-2.5 min-w-0">
+    <div className={`flex flex-wrap items-center justify-between gap-3 ${className}`}>
+      <div className="flex items-center space-x-2.5 min-w-[200px] flex-1">
         {icon && (
           <div className={`${iconWrapClass} shrink-0 ${iconBadgeClass}`}>
             {icon}
@@ -62,7 +62,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       </div>
 
       {actions && (
-        <div className="flex flex-wrap items-center gap-2 shrink-0">
+        <div className="flex flex-wrap items-center gap-2 max-w-full">
           {actions}
         </div>
       )}
