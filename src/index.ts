@@ -19,6 +19,8 @@ export * from './components/inputs/ChipSelector';
 export * from './components/inputs/OptionCardGroup';
 export * from './components/inputs/RangeSlider';
 export * from './components/inputs/SegmentedControl';
+export * from './components/inputs/PeriodFilterBar';
+export * from './components/inputs/TagPillList';
 export * from './components/inputs/Button';
 
 // Feedback & Displays
@@ -29,6 +31,8 @@ export * from './components/feedback/StatCard';
 export * from './components/feedback/SelectableCard';
 export * from './components/feedback/StatusBadge';
 export * from './components/feedback/GlassCard';
+export * from './components/feedback/SectionHeader';
+export * from './components/feedback/BudgetProgressRow';
 export * from './components/feedback/AllowanceProgressBar';
 export * from './components/feedback/GoalProgressCard';
 export * from './components/feedback/MultiSegmentBar';
