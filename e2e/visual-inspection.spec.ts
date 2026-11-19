@@ -76,6 +76,15 @@ for (const { name: platform, options } of PLATFORMS) {
       await page.screenshot({
         path: `screenshots/${platform}/05-metric-hero.png`,
       });
+
+      // 6. Midas Shared Primitives (BudgetProgressRow with custom transactionCountLabel)
+      await page.goto('/iframe.html?id=patterns-midassharedprimitives--budget-and-period-showcase&viewMode=story');
+      await expect(page.locator('text=4 txns (47%)')).toBeVisible();
+      await expect(page.locator('text=2 + 2 fixed (1%)')).toBeVisible();
+      await page.waitForTimeout(200);
+      await page.screenshot({
+        path: `screenshots/${platform}/16-budget-progress-row.png`,
+      });
     });
   });
 }

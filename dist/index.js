@@ -1651,24 +1651,25 @@ const zt = ({
   icon: t,
   spendFormatted: s,
   transactionCount: a,
-  percentage: l = 0,
-  budgetSummaryLabel: n,
-  remainingOrOverFormatted: o,
-  percentUsed: d,
-  isOverBudget: c = !1,
-  warningLevel: m = "normal",
-  isTransfer: u = !1,
-  transferNote: x = "Internal transfers between accounts - Excluded from spend",
-  onRowClick: v,
-  onEditTargetClick: b,
-  "data-testid": p
+  transactionCountLabel: l,
+  percentage: n = 0,
+  budgetSummaryLabel: o,
+  remainingOrOverFormatted: d,
+  percentUsed: c,
+  isOverBudget: m = !1,
+  warningLevel: u = "normal",
+  isTransfer: x = !1,
+  transferNote: v = "Internal transfers between accounts - Excluded from spend",
+  onRowClick: b,
+  onEditTargetClick: p,
+  "data-testid": y
 }) => {
-  const y = !u && !!n, f = Math.min(Math.max(d ?? 0, 0), 100), h = ye[m] || ye.normal;
+  const f = !x && !!o, h = Math.min(Math.max(c ?? 0, 0), 100), w = ye[u] || ye.normal;
   return /* @__PURE__ */ i(
     "div",
     {
-      "data-testid": p,
-      onClick: v,
+      "data-testid": y,
+      onClick: b,
       title: `Click to inspect transactions in ${r}`,
       className: "p-3 bg-card/40 hover:bg-card/70 rounded-xl border border-border hover:border-slate-600 transition-all cursor-pointer space-y-1.5 group",
       children: [
@@ -1677,43 +1678,41 @@ const zt = ({
             t && /* @__PURE__ */ e("div", { className: "p-1 rounded bg-background border border-border shrink-0", children: t }),
             /* @__PURE__ */ e("span", { className: "font-medium text-slate-200 group-hover:text-amber-300 transition-colors truncate", children: r }),
             /* @__PURE__ */ i("span", { className: "text-[10px] text-slate-500 font-mono shrink-0", children: [
-              a,
-              " ",
-              a === 1 ? "txn" : "txns",
-              !u && ` (${Math.round(l)}%)`
+              l ?? `${a} ${a === 1 ? "txn" : "txns"}`,
+              !x && ` (${Math.round(n)}%)`
             ] })
           ] }),
           /* @__PURE__ */ i("div", { className: "flex items-center space-x-2 shrink-0", children: [
-            /* @__PURE__ */ e("span", { className: `font-semibold font-mono ${u ? "text-sky-300" : "text-slate-100"}`, children: s }),
+            /* @__PURE__ */ e("span", { className: `font-semibold font-mono ${x ? "text-sky-300" : "text-slate-100"}`, children: s }),
             /* @__PURE__ */ e("div", { className: "p-1 rounded bg-card/80 text-slate-400 group-hover:text-slate-200 border border-transparent group-hover:border-border transition-colors", children: /* @__PURE__ */ e(De, { className: "w-3 h-3" }) })
           ] })
         ] }),
-        u ? /* @__PURE__ */ i("div", { className: "flex justify-between items-center text-[10px] text-sky-400/90 pt-0.5", children: [
+        x ? /* @__PURE__ */ i("div", { className: "flex justify-between items-center text-[10px] text-sky-400/90 pt-0.5", children: [
           /* @__PURE__ */ i("span", { className: "flex items-center space-x-1", children: [
             /* @__PURE__ */ e(Ve, { className: "w-2.5 h-2.5 shrink-0" }),
-            /* @__PURE__ */ e("span", { children: x })
+            /* @__PURE__ */ e("span", { children: v })
           ] }),
           /* @__PURE__ */ e("span", { className: "text-slate-400 hover:text-slate-200 shrink-0", children: "Inspect txns" })
-        ] }) : y ? /* @__PURE__ */ i("div", { className: "space-y-1", children: [
+        ] }) : f ? /* @__PURE__ */ i("div", { className: "space-y-1", children: [
           /* @__PURE__ */ e("div", { className: "w-full bg-background rounded-full h-2 overflow-hidden border border-border", children: /* @__PURE__ */ e(
             "div",
             {
-              className: `h-full rounded-full transition-all duration-500 ${h}`,
-              style: { width: `${f}%` }
+              className: `h-full rounded-full transition-all duration-500 ${w}`,
+              style: { width: `${h}%` }
             }
           ) }),
           /* @__PURE__ */ i("div", { className: "flex justify-between items-center text-[10px] text-slate-400 font-mono", children: [
-            /* @__PURE__ */ e("span", { children: n }),
+            /* @__PURE__ */ e("span", { children: o }),
             /* @__PURE__ */ i("div", { className: "flex items-center space-x-2", children: [
-              o && (c ? /* @__PURE__ */ i("span", { className: "text-rose-400 font-semibold flex items-center space-x-1", children: [
+              d && (m ? /* @__PURE__ */ i("span", { className: "text-rose-400 font-semibold flex items-center space-x-1", children: [
                 /* @__PURE__ */ e(Q, { className: "w-3 h-3" }),
-                /* @__PURE__ */ e("span", { children: o })
-              ] }) : /* @__PURE__ */ e("span", { className: "text-emerald-400", children: o })),
-              b && /* @__PURE__ */ e(
+                /* @__PURE__ */ e("span", { children: d })
+              ] }) : /* @__PURE__ */ e("span", { className: "text-emerald-400", children: d })),
+              p && /* @__PURE__ */ e(
                 "button",
                 {
                   type: "button",
-                  onClick: b,
+                  onClick: p,
                   title: "Edit budget target",
                   className: "text-slate-500 hover:text-amber-400 p-0.5",
                   children: /* @__PURE__ */ e(ie, { className: "w-2.5 h-2.5" })
@@ -1723,11 +1722,11 @@ const zt = ({
           ] })
         ] }) : /* @__PURE__ */ i("div", { className: "flex justify-between items-center text-[10px] text-slate-500 pt-0.5", children: [
           /* @__PURE__ */ e("span", { children: "No target budget configured" }),
-          b && /* @__PURE__ */ i(
+          p && /* @__PURE__ */ i(
             "button",
             {
               type: "button",
-              onClick: b,
+              onClick: p,
               className: "text-amber-400/80 hover:text-amber-300 flex items-center space-x-0.5",
               children: [
                 /* @__PURE__ */ e(ie, { className: "w-2.5 h-2.5" }),

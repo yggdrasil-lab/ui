@@ -5,6 +5,8 @@ export interface BudgetProgressRowProps {
     icon?: React.ReactNode;
     spendFormatted: string;
     transactionCount: number;
+    /** Optional override for the default "<N> txn(s)" count label (e.g. "2 + 2 fixed"). */
+    transactionCountLabel?: string;
     percentage?: number;
     budgetSummaryLabel?: string | null;
     remainingOrOverFormatted?: string | null;

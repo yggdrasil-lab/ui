@@ -8,6 +8,8 @@ export interface BudgetProgressRowProps {
   icon?: React.ReactNode;
   spendFormatted: string;
   transactionCount: number;
+  /** Optional override for the default "<N> txn(s)" count label (e.g. "2 + 2 fixed"). */
+  transactionCountLabel?: string;
   percentage?: number;
   budgetSummaryLabel?: string | null;
   remainingOrOverFormatted?: string | null;
@@ -36,6 +38,7 @@ export const BudgetProgressRow: React.FC<BudgetProgressRowProps> = ({
   icon,
   spendFormatted,
   transactionCount,
+  transactionCountLabel,
   percentage = 0,
   budgetSummaryLabel,
   remainingOrOverFormatted,
@@ -70,7 +73,8 @@ export const BudgetProgressRow: React.FC<BudgetProgressRowProps> = ({
             {category}
           </span>
           <span className="text-[10px] text-slate-500 font-mono shrink-0">
-            {transactionCount} {transactionCount === 1 ? 'txn' : 'txns'}
+            {transactionCountLabel ??
+              `${transactionCount} ${transactionCount === 1 ? 'txn' : 'txns'}`}
             {!isTransfer && ` (${Math.round(percentage)}%)`}
           </span>
         </div>
