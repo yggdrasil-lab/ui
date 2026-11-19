@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { PieChart, ShoppingCart, Target } from 'lucide-react';
+import { PieChart, ShoppingCart, Target, Zap } from 'lucide-react';
 import { BudgetProgressRow } from '../components/feedback/BudgetProgressRow';
 import { GlassCard } from '../components/feedback/GlassCard';
 import { SectionHeader } from '../components/feedback/SectionHeader';
@@ -36,7 +36,7 @@ export const BudgetAndPeriodShowcase: Story = {
     const [tags, setTags] = useState(['weekly-shop', 'pantry']);
 
     return (
-      <div className="w-[460px] space-y-4">
+      <div className="w-full max-w-[460px] space-y-4">
         <GlassCard className="space-y-4">
           <SectionHeader
             title="Category Spending & Budgets"
@@ -72,6 +72,19 @@ export const BudgetAndPeriodShowcase: Story = {
             percentUsed={117}
             isOverBudget
             warningLevel="danger"
+          />
+
+          <BudgetProgressRow
+            category="Utilities"
+            icon={<Zap className="w-3.5 h-3.5 text-amber-400" />}
+            spendFormatted="$46.99 NZD"
+            transactionCount={4}
+            transactionCountLabel="2 + 2 fixed"
+            percentage={1}
+            budgetSummaryLabel="$47 of $347 (14%)"
+            remainingOrOverFormatted="$300 left"
+            percentUsed={14}
+            warningLevel="normal"
           />
 
           <TagPillList
