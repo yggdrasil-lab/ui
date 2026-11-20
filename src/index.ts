@@ -22,6 +22,7 @@ export * from './components/inputs/SegmentedControl';
 export * from './components/inputs/PeriodFilterBar';
 export * from './components/inputs/TagPillList';
 export * from './components/inputs/Button';
+export * from './components/inputs/PaginationBar';
 
 // Feedback & Displays
 export * from './components/feedback/Modal';
@@ -45,14 +46,18 @@ export * from './components/feedback/CollapsibleSection';
 export * from './components/feedback/PwaUpdateBanner';
 export * from './components/feedback/SessionExpiredBanner';
 export * from './components/feedback/RestTimerBar';
+export * from './components/feedback/KeyValueList';
+export * from './components/feedback/PayloadViewer';
 
 // Hooks & Utilities
 export * from './hooks/usePwaUpdate';
 export * from './hooks/useRestTimer';
+export * from './hooks/useCopyFeedback';
 export * from './utils/telemetry';
 export * from './utils/format';
 export * from './utils/viewport';
 export * from './utils/cacheReset';
+export * from './utils/clipboard';
 
 // Auth & Session
 export * from './auth';
