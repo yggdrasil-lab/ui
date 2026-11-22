@@ -29,7 +29,7 @@ const BASE_TILE_CLASSES =
   'min-w-0 px-2.5 py-2 rounded-xl bg-background/60 border border-border/60';
 
 const INTERACTIVE_TILE_CLASSES =
-  'w-full min-h-[44px] flex flex-col justify-center text-center cursor-pointer transition-all hover:border-amber-500/50 hover:bg-background/90 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/60 group';
+  'w-full min-h-[44px] flex flex-col items-stretch justify-center text-center cursor-pointer transition-[border-color,background-color,box-shadow,transform] hover:border-amber-500/50 hover:bg-background/90 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/60 group';
 
 /**
  * Responsive 2-, 3-, or 4-column summary metric tile grid supporting both
