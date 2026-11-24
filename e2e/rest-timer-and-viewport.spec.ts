@@ -15,7 +15,7 @@ test.describe('RestTimerBar States & Interaction (Mobile iPhone 14)', () => {
     page,
   }) => {
     // 1. Idle
-    await page.goto('/iframe.html?id=feedback-resttimerbar--idle&viewMode=story');
+    await page.goto('/iframe.html?id=patterns-resttimerbar--idle&viewMode=story');
     const bar = page.getByTestId('rest-timer-bar');
     await expect(bar).toBeVisible();
     await expect(bar.getByText('Rest Timer')).toBeVisible();
@@ -29,7 +29,7 @@ test.describe('RestTimerBar States & Interaction (Mobile iPhone 14)', () => {
     await page.screenshot({ path: 'screenshots/ios/06-rest-timer-idle.png' });
 
     // 2. ActiveCountdown
-    await page.goto('/iframe.html?id=feedback-resttimerbar--active-countdown&viewMode=story');
+    await page.goto('/iframe.html?id=patterns-resttimerbar--active-countdown&viewMode=story');
     await expect(page.getByTestId('rest-timer-countdown')).toHaveText('0:54');
     await expect(bar.getByText('of 1:30')).toBeVisible();
     await expect(bar.getByRole('button', { name: /Pause rest timer/i })).toBeVisible();
@@ -37,14 +37,14 @@ test.describe('RestTimerBar States & Interaction (Mobile iPhone 14)', () => {
     await page.screenshot({ path: 'screenshots/ios/07-rest-timer-active.png' });
 
     // 3. Paused
-    await page.goto('/iframe.html?id=feedback-resttimerbar--paused&viewMode=story');
+    await page.goto('/iframe.html?id=patterns-resttimerbar--paused&viewMode=story');
     await expect(page.getByTestId('rest-timer-countdown')).toHaveText('0:42');
     await expect(bar.getByText('Paused')).toBeVisible();
     await expect(bar.getByRole('button', { name: /Resume rest timer/i })).toBeVisible();
     await page.screenshot({ path: 'screenshots/ios/08-rest-timer-paused.png' });
 
     // 4. Complete
-    await page.goto('/iframe.html?id=feedback-resttimerbar--complete&viewMode=story');
+    await page.goto('/iframe.html?id=patterns-resttimerbar--complete&viewMode=story');
     await expect(bar.getByText('Rest Complete - Ready for next set')).toBeVisible();
     await expect(page.getByTestId('rest-timer-countdown')).toHaveText('0:00');
     await expect(bar.getByRole('button', { name: /Dismiss rest timer/i })).toBeVisible();
@@ -52,7 +52,7 @@ test.describe('RestTimerBar States & Interaction (Mobile iPhone 14)', () => {
   });
 
   test('supports live start, adjust, pause, resume, and dismiss actions', async ({ page }) => {
-    await page.goto('/iframe.html?id=feedback-resttimerbar--interactive&viewMode=story');
+    await page.goto('/iframe.html?id=patterns-resttimerbar--interactive&viewMode=story');
     const bar = page.getByTestId('rest-timer-bar');
     await expect(bar).toBeVisible();
 
@@ -90,7 +90,7 @@ test.describe('Mobile Viewport Zoom Reset & Input Font Sizing', () => {
     test('uses 16px font-size on SearchInput and AiSynthesizerModal textarea to prevent iOS auto-zoom', async ({
       page,
     }) => {
-      await page.goto('/iframe.html?id=inputs-searchinput--default&viewMode=story');
+      await page.goto('/iframe.html?id=primitives-searchinput--default&viewMode=story');
       const searchInput = page.locator('input[type="text"]');
       await expect(searchInput).toBeVisible();
       const searchFontSize = await searchInput.evaluate(
@@ -99,7 +99,7 @@ test.describe('Mobile Viewport Zoom Reset & Input Font Sizing', () => {
       expect(searchFontSize).toBe('16px');
 
       await page.goto(
-        '/iframe.html?id=feedback-aisynthesizermodal--workout-synthesizer&viewMode=story'
+        '/iframe.html?id=patterns-aisynthesizermodal--workout-synthesizer&viewMode=story'
       );
       await page.getByRole('button', { name: /Open Workout AI Synthesizer/i }).click();
       const textarea = page.locator('textarea');
@@ -112,7 +112,7 @@ test.describe('Mobile Viewport Zoom Reset & Input Font Sizing', () => {
 
     test('resets viewport meta and blurs active element when Modal closes', async ({ page }) => {
       await page.goto(
-        '/iframe.html?id=feedback-aisynthesizermodal--workout-synthesizer&viewMode=story'
+        '/iframe.html?id=patterns-aisynthesizermodal--workout-synthesizer&viewMode=story'
       );
 
       // Simulate host PWA starting without maximum-scale=1.0
@@ -152,7 +152,7 @@ test.describe('Mobile Viewport Zoom Reset & Input Font Sizing', () => {
     test.use({ viewport: { width: 1280, height: 800 } });
 
     test('keeps compact 12px font-size on sm+ viewports', async ({ page }) => {
-      await page.goto('/iframe.html?id=inputs-searchinput--default&viewMode=story');
+      await page.goto('/iframe.html?id=primitives-searchinput--default&viewMode=story');
       const searchInput = page.locator('input[type="text"]');
       await expect(searchInput).toBeVisible();
       const searchFontSize = await searchInput.evaluate(
@@ -161,7 +161,7 @@ test.describe('Mobile Viewport Zoom Reset & Input Font Sizing', () => {
       expect(searchFontSize).toBe('12px');
 
       await page.goto(
-        '/iframe.html?id=feedback-aisynthesizermodal--workout-synthesizer&viewMode=story'
+        '/iframe.html?id=patterns-aisynthesizermodal--workout-synthesizer&viewMode=story'
       );
       await page.getByRole('button', { name: /Open Workout AI Synthesizer/i }).click();
       const textarea = page.locator('textarea');

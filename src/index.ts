@@ -4,50 +4,50 @@ import './styles/globals.css';
 // Theme & Variants
 export * from './theme/variants';
 
-// Shell components
-export * from './components/shell/AppShell';
-export * from './components/shell/AppHeader';
-export * from './components/shell/BottomNav';
+// Shells
+export * from './shells/AppShell';
+export * from './shells/AppHeader';
+export * from './shells/BottomNav';
 
-// Inputs
-export * from './components/inputs/TactileKeypad';
-export * from './components/inputs/NumberInputDisplay';
-export * from './components/inputs/NumericKeypadModal';
-export * from './components/inputs/SearchInput';
-export * from './components/inputs/FileDropzone';
-export * from './components/inputs/ChipSelector';
-export * from './components/inputs/OptionCardGroup';
-export * from './components/inputs/RangeSlider';
-export * from './components/inputs/SegmentedControl';
-export * from './components/inputs/PeriodFilterBar';
-export * from './components/inputs/TagPillList';
-export * from './components/inputs/Button';
-export * from './components/inputs/PaginationBar';
+// Primitives
+export * from './primitives/AlertBanner';
+export * from './primitives/Button';
+export * from './primitives/ChipSelector';
+export * from './primitives/EmptyState';
+export * from './primitives/FileDropzone';
+export * from './primitives/GlassCard';
+export * from './primitives/LoadingState';
+export * from './primitives/Modal';
+export * from './primitives/MultiSegmentBar';
+export * from './primitives/NumberInputDisplay';
+export * from './primitives/OptionCardGroup';
+export * from './primitives/RangeSlider';
+export * from './primitives/SearchInput';
+export * from './primitives/SectionHeader';
+export * from './primitives/SegmentedControl';
+export * from './primitives/SelectableCard';
+export * from './primitives/StatusBadge';
+export * from './primitives/TactileKeypad';
+export * from './primitives/TagPillList';
 
-// Feedback & Displays
-export * from './components/feedback/Modal';
-export * from './components/feedback/AiSynthesizerModal';
-export * from './components/feedback/MetricHero';
-export * from './components/feedback/StatCard';
-export * from './components/feedback/SelectableCard';
-export * from './components/feedback/StatusBadge';
-export * from './components/feedback/GlassCard';
-export * from './components/feedback/SectionHeader';
-export * from './components/feedback/BudgetProgressRow';
-export * from './components/feedback/AllowanceProgressBar';
-export * from './components/feedback/GoalProgressCard';
-export * from './components/feedback/MultiSegmentBar';
-export * from './components/feedback/SummaryMetricGrid';
-export * from './components/feedback/EmptyState';
-export * from './components/feedback/LoadingState';
-export * from './components/feedback/ConfirmActionBox';
-export * from './components/feedback/AlertBanner';
-export * from './components/feedback/CollapsibleSection';
-export * from './components/feedback/PwaUpdateBanner';
-export * from './components/feedback/SessionExpiredBanner';
-export * from './components/feedback/RestTimerBar';
-export * from './components/feedback/KeyValueList';
-export * from './components/feedback/PayloadViewer';
+// Patterns
+export * from './patterns/AiSynthesizerModal';
+export * from './patterns/AllowanceProgressBar';
+export * from './patterns/BudgetProgressRow';
+export * from './patterns/CollapsibleSection';
+export * from './patterns/ConfirmActionBox';
+export * from './patterns/GoalProgressCard';
+export * from './patterns/KeyValueList';
+export * from './patterns/MetricHero';
+export * from './patterns/NumericKeypadModal';
+export * from './patterns/PaginationBar';
+export * from './patterns/PayloadViewer';
+export * from './patterns/PeriodFilterBar';
+export * from './patterns/PwaUpdateBanner';
+export * from './patterns/RestTimerBar';
+export * from './patterns/SessionExpiredBanner';
+export * from './patterns/StatCard';
+export * from './patterns/SummaryMetricGrid';
 
 // Hooks & Utilities
 export * from './hooks/usePwaUpdate';
