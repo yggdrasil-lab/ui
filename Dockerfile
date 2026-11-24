@@ -6,7 +6,7 @@ COPY package.json package-lock.json* .npmrc* ./
 RUN npm install --legacy-peer-deps
 
 COPY . .
-RUN npm run build:storybook
+RUN npx tsc --noEmit && npm run build:storybook
 
 FROM nginx:1.27-alpine
 

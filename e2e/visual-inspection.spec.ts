@@ -31,7 +31,7 @@ for (const { name: platform, options } of PLATFORMS) {
 
     test(`captures standardized UI design tokens and components on ${platform}`, async ({ page }) => {
       // 1. App Shell & Bottom Navigation
-      await page.goto('/iframe.html?id=shell-appshell--default&viewMode=story');
+      await page.goto('/iframe.html?id=shells-appshell--default&viewMode=story');
       await expect(page.locator('header h1')).toBeVisible();
       await page.waitForTimeout(300);
       await page.screenshot({
@@ -39,7 +39,7 @@ for (const { name: platform, options } of PLATFORMS) {
       });
 
       // 2. Tactile Numeric Keypad
-      await page.goto('/iframe.html?id=inputs-tactilekeypad--currency-logger&viewMode=story');
+      await page.goto('/iframe.html?id=primitives-tactilekeypad--currency-logger&viewMode=story');
       await expect(page.locator('text=Expense Amount')).toBeVisible();
       const num5 = page.getByRole('button', { name: '5', exact: true });
       if (await num5.isVisible()) {
@@ -51,7 +51,7 @@ for (const { name: platform, options } of PLATFORMS) {
       });
 
       // 3. Stat Cards & Financial Tiers
-      await page.goto('/iframe.html?id=feedback-statcard--cash-floor&viewMode=story');
+      await page.goto('/iframe.html?id=patterns-statcard--cash-floor&viewMode=story');
       await expect(page.locator('text=Cash Floor')).toBeVisible();
       await page.waitForTimeout(200);
       await page.screenshot({
@@ -59,7 +59,7 @@ for (const { name: platform, options } of PLATFORMS) {
       });
 
       // 4. Interactive Modal Dialog
-      await page.goto('/iframe.html?id=feedback-modal--interactive-modal&viewMode=story');
+      await page.goto('/iframe.html?id=primitives-modal--interactive-modal&viewMode=story');
       const openBtn = page.getByRole('button', { name: /Open Quick Log Modal/i });
       await expect(openBtn).toBeVisible();
       await openBtn.click();
@@ -70,7 +70,7 @@ for (const { name: platform, options } of PLATFORMS) {
       });
 
       // 5. Metric Hero Display
-      await page.goto('/iframe.html?id=feedback-metrichero--freedom-clock-hero&viewMode=story');
+      await page.goto('/iframe.html?id=patterns-metrichero--freedom-clock-hero&viewMode=story');
       await expect(page.locator('text=Financial Freedom Clock')).toBeVisible();
       await page.waitForTimeout(200);
       await page.screenshot({
@@ -78,7 +78,7 @@ for (const { name: platform, options } of PLATFORMS) {
       });
 
       // 6. Midas Shared Primitives (BudgetProgressRow with custom transactionCountLabel)
-      await page.goto('/iframe.html?id=patterns-midassharedprimitives--budget-and-period-showcase&viewMode=story');
+      await page.goto('/iframe.html?id=patterns-budgetprogressrow--spending-guardrails-showcase&viewMode=story');
       await expect(page.locator('text=4 txns (47%)')).toBeVisible();
       await expect(page.locator('text=2 + 2 fixed (1%)')).toBeVisible();
       await page.waitForTimeout(200);

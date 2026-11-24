@@ -18,9 +18,10 @@
   },
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "tsc --noEmit && vite build && storybook build -o dist-storybook",
-    "build:lib": "tsc --noEmit && vite build",
-    "build:storybook": "storybook build -o dist-storybook",
+    "check:layers": "node scripts/check-layers.mjs",
+    "build": "npm run check:layers && tsc --noEmit && vite build && storybook build -o dist-storybook",
+    "build:lib": "npm run check:layers && tsc --noEmit && vite build",
+    "build:storybook": "npm run check:layers && storybook build -o dist-storybook",
     "preview": "storybook dev -p 6006 --ci"
   },
   "peerDependencies": {
