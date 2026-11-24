@@ -1,4 +1,5 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 export type StatusBadgeVariant = 'idle' | 'busy' | 'success' | 'error' | 'warning' | 'info';
 
@@ -6,6 +7,7 @@ export interface StatusBadgeProps {
   label: string;
   variant?: StatusBadgeVariant;
   icon?: React.ReactNode;
+  showDot?: boolean;
   isPulsing?: boolean;
   className?: string;
 }
@@ -41,6 +43,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   label,
   variant = 'idle',
   icon,
+  showDot = true,
   isPulsing = false,
   className = '',
 }) => {
@@ -48,13 +51,23 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
 
   return (
     <div
-      className={`status-badge inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border backdrop-blur-sm ${style.bg} ${className}`}
+      className={twMerge(
+        'status-badge inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border backdrop-blur-sm',
+        style.bg,
+        className
+      )}
     >
       {icon ? (
         <span className="mr-1.5 shrink-0 flex items-center">{icon}</span>
-      ) : (
-        <span className={`w-1.5 h-1.5 rounded-full mr-1.5 shrink-0 ${style.dot} ${isPulsing ? 'animate-pulse' : ''}`} />
-      )}
+      ) : showDot ? (
+        <span
+          className={twMerge(
+            'w-1.5 h-1.5 rounded-full mr-1.5 shrink-0',
+            style.dot,
+            isPulsing && 'animate-pulse'
+          )}
+        />
+      ) : null}
       <span className="truncate">{label}</span>
     </div>
   );

@@ -6,7 +6,7 @@ const meta: Meta<typeof CollapsibleSection> = {
   title: 'Patterns/CollapsibleSection',
   component: CollapsibleSection,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
 };
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof CollapsibleSection>;
 
 export const ResearchAccordion: Story = {
   render: () => (
-    <div className="w-96 bg-card p-5 rounded-2xl border border-border space-y-4">
+    <div className="w-full max-w-sm mx-auto bg-card p-5 rounded-2xl border border-border space-y-4">
       <CollapsibleSection
         variant="inline"
         icon="📚"

@@ -7,7 +7,7 @@ const meta: Meta<typeof SectionHeader> = {
   title: 'Primitives/SectionHeader',
   component: SectionHeader,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
 };
@@ -17,7 +17,7 @@ type Story = StoryObj<typeof SectionHeader>;
 
 export const WithActionButton: Story = {
   render: () => (
-    <div className="w-[440px] p-4 bg-card rounded-2xl border border-border">
+    <div className="w-full max-w-md mx-auto p-4 bg-card rounded-2xl border border-border">
       <SectionHeader
         title="Category Spending & Budgets"
         subtitle="Track weekly burn vs average-burn guardrails"
@@ -35,7 +35,7 @@ export const WithActionButton: Story = {
 
 export const MediumUppercase: Story = {
   render: () => (
-    <div className="w-[440px] p-4 bg-card rounded-2xl border border-border">
+    <div className="w-full max-w-md mx-auto p-4 bg-card rounded-2xl border border-border">
       <SectionHeader
         title="Portfolio Allocation"
         subtitle="Real-time asset mix across liquidity tiers"

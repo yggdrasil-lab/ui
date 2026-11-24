@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { GlassCard } from '../primitives/GlassCard';
 
 export interface CollapsibleSectionProps {
   title: React.ReactNode;
@@ -25,9 +26,10 @@ export const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
 
   if (variant === 'card') {
     return (
-      <div className={`glass-panel bg-card/70 backdrop-blur-md border border-border/80 rounded-2xl p-4 shadow-lg ${className}`}>
+      <GlassCard padding="md" className={className}>
         <button
           type="button"
+          aria-expanded={isOpen}
           onClick={() => setIsOpen((prev) => !prev)}
           className="w-full flex items-center justify-between text-left bg-transparent border-none p-0 cursor-pointer"
         >
@@ -45,7 +47,7 @@ export const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
             {children}
           </div>
         )}
-      </div>
+      </GlassCard>
     );
   }
 
@@ -53,6 +55,7 @@ export const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
     <div className={`pt-2 border-t border-border/40 ${className}`}>
       <button
         type="button"
+        aria-expanded={isOpen}
         onClick={() => setIsOpen((prev) => !prev)}
         className="bg-transparent border-none p-0 inline-flex items-center gap-1.5 text-sky-400 hover:text-sky-300 text-xs cursor-pointer"
       >

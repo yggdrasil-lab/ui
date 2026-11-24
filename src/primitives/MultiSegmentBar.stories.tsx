@@ -6,7 +6,7 @@ const meta: Meta<typeof MultiSegmentBar> = {
   title: 'Primitives/MultiSegmentBar',
   component: MultiSegmentBar,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
 };
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof MultiSegmentBar>;
 
 export const HeartRateZones: Story = {
   render: () => (
-    <div className="w-[420px] p-4 bg-card rounded-2xl border border-border">
+    <div className="w-full max-w-md mx-auto p-4 bg-card rounded-2xl border border-border">
       <MultiSegmentBar
         heightClass="h-2"
         segments={[
@@ -33,7 +33,7 @@ export const HeartRateZones: Story = {
 
 export const PortfolioTiers: Story = {
   render: () => (
-    <div className="w-[420px] p-4 bg-card rounded-2xl border border-border">
+    <div className="w-full max-w-md mx-auto p-4 bg-card rounded-2xl border border-border">
       <MultiSegmentBar
         heightClass="h-3"
         segments={[

@@ -8,7 +8,7 @@ const meta: Meta<typeof EmptyState> = {
   title: 'Primitives/EmptyState',
   component: EmptyState,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
 };
@@ -18,7 +18,7 @@ type Story = StoryObj<typeof EmptyState>;
 
 export const DashedPlaceholder: Story = {
   render: () => (
-    <div className="w-[420px]">
+    <div className="w-full max-w-md mx-auto">
       <EmptyState
         icon={<Inbox className="w-8 h-8" />}
         title="No matching transactions"
@@ -31,7 +31,7 @@ export const DashedPlaceholder: Story = {
 
 export const GlassVariant: Story = {
   render: () => (
-    <div className="w-[420px]">
+    <div className="w-full max-w-md mx-auto">
       <EmptyState
         variant="glass"
         title="No sessions logged today"

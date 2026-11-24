@@ -8,7 +8,7 @@ const meta: Meta<typeof SelectableCard> = {
   title: 'Primitives/SelectableCard',
   component: SelectableCard,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
 };
@@ -20,7 +20,7 @@ export const AccountCardExample: Story = {
   render: () => {
     const [selected, setSelected] = useState('asb');
     return (
-      <div className="p-4 bg-slate-900 rounded-xl grid grid-cols-2 gap-3 w-[520px]">
+      <div className="p-4 bg-slate-900 rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-lg mx-auto">
         <SelectableCard
           title="ASB Everyday Checking"
           subtitle="ASB • checking"

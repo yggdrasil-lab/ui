@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
+import { GlassCard } from '../primitives/GlassCard';
 
 export interface SummaryMetricItem {
   id?: string;
@@ -76,9 +77,14 @@ const SummaryMetricTile: React.FC<SummaryMetricTileProps> = ({ item }) => {
   }
 
   return (
-    <div data-testid={item.testId} className={BASE_TILE_CLASSES}>
+    <GlassCard
+      tone="solid"
+      padding="none"
+      data-testid={item.testId}
+      className="min-w-0 px-2.5 py-2 rounded-xl shadow-none bg-background/60 border-border/60"
+    >
       <SummaryMetricTileContent item={item} isInteractive={false} />
-    </div>
+    </GlassCard>
   );
 };
 

@@ -1,4 +1,6 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
+import { GlassCard } from '../primitives/GlassCard';
 
 export type StatCardVariant = 'default' | 'card' | 'amber' | 'emerald' | 'sky';
 
@@ -53,11 +55,16 @@ export const StatCard: React.FC<StatCardProps> = ({
   const isClickable = Boolean(onClick);
 
   return (
-    <div
+    <GlassCard
+      tone="solid"
+      padding="none"
       onClick={onClick}
-      className={`p-2.5 sm:p-3 rounded-xl border transition-all duration-150 ${
-        styles.container
-      } ${isClickable ? 'cursor-pointer hover:border-border active:scale-[0.99]' : ''} ${className}`}
+      className={twMerge(
+        'p-2.5 sm:p-3 rounded-xl shadow-none transition-all duration-150',
+        styles.container,
+        isClickable && 'hover:border-border',
+        className
+      )}
     >
       <div className="flex items-center text-[10px] sm:text-xs text-slate-400 mb-1 truncate">
         {icon && (
@@ -79,6 +86,6 @@ export const StatCard: React.FC<StatCardProps> = ({
           {subtitle}
         </div>
       )}
-    </div>
+    </GlassCard>
   );
 };

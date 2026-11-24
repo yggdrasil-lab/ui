@@ -6,7 +6,7 @@ const meta: Meta<typeof FileDropzone> = {
   title: 'Primitives/FileDropzone',
   component: FileDropzone,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
 };
@@ -18,7 +18,7 @@ export const Default: Story = {
   render: () => {
     const [file, setFile] = useState<File | null>(null);
     return (
-      <div className="w-[420px]">
+      <div className="w-full max-w-md mx-auto">
         <FileDropzone
           file={file}
           onFileChange={setFile}
@@ -36,7 +36,7 @@ export const WithSelectedFile: Story = {
     const mockFile = new File(['test,data'], 'asb-october-statement.pdf', { type: 'application/pdf' });
     const [file, setFile] = useState<File | null>(mockFile);
     return (
-      <div className="w-[420px]">
+      <div className="w-full max-w-md mx-auto">
         <FileDropzone
           file={file}
           onFileChange={setFile}

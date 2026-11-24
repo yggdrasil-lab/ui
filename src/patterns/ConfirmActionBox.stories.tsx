@@ -6,7 +6,7 @@ const meta: Meta<typeof ConfirmActionBox> = {
   title: 'Patterns/ConfirmActionBox',
   component: ConfirmActionBox,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
 };
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof ConfirmActionBox>;
 
 export const DangerDelete: Story = {
   render: () => (
-    <div className="w-[400px]">
+    <div className="w-full max-w-md mx-auto">
       <ConfirmActionBox
         variant="danger"
         title="Delete workout session?"
@@ -32,7 +32,7 @@ export const DangerDelete: Story = {
 
 export const WarningAction: Story = {
   render: () => (
-    <div className="w-[400px]">
+    <div className="w-full max-w-md mx-auto">
       <ConfirmActionBox
         variant="warning"
         title="Discard unsaved set changes?"

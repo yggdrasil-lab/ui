@@ -6,7 +6,7 @@ const meta: Meta<typeof OptionCardGroup> = {
   title: 'Primitives/OptionCardGroup',
   component: OptionCardGroup,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
 };
@@ -18,7 +18,7 @@ export const WorkoutEffortRating: Story = {
   render: () => {
     const [rating, setRating] = useState('optimal');
     return (
-      <div className="w-96 bg-card p-5 rounded-2xl border border-border">
+      <div className="w-full max-w-sm mx-auto bg-card p-5 rounded-2xl border border-border">
         <OptionCardGroup
           label="How much effort did this take?"
           value={rating}

@@ -6,7 +6,7 @@ const meta: Meta<typeof GoalProgressCard> = {
   title: 'Patterns/GoalProgressCard',
   component: GoalProgressCard,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
 };
@@ -29,7 +29,7 @@ export const WeightGoalTracker: Story = {
     variant: 'blue',
   },
   render: (args) => (
-    <div className="w-96">
+    <div className="w-full max-w-sm mx-auto">
       <GoalProgressCard {...args} />
     </div>
   ),
