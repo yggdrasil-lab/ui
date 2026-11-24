@@ -1,8 +1,10 @@
 import { default as React } from 'react';
-export interface GlassCardProps {
+export type GlassCardPadding = 'none' | 'sm' | 'md' | 'lg';
+export type GlassCardTone = 'glass' | 'solid';
+export interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
-    className?: string;
-    onClick?: () => void;
+    padding?: GlassCardPadding;
+    tone?: GlassCardTone;
     hoverGlow?: boolean;
 }
 export declare const GlassCard: React.FC<GlassCardProps>;

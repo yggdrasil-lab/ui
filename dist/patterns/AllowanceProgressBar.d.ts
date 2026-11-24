@@ -10,13 +10,6 @@ export interface AllowanceThresholdState {
     barColor: string;
     percentTextColor: string;
 }
-/**
- * Pure threshold calculation for allowance progress bars:
- * - <= 70%: healthy (emerald)
- * - 71-90%: warning (amber)
- * - > 90%: critical (rose)
- */
-export declare function getAllowanceThresholdState(currentValue: number, targetValue: number): AllowanceThresholdState;
 export interface AllowanceProgressBarProps {
     title: string;
     subtitle?: string;
@@ -31,3 +24,10 @@ export interface AllowanceProgressBarProps {
     className?: string;
 }
 export declare const AllowanceProgressBar: React.FC<AllowanceProgressBarProps>;
+/**
+ * Pure threshold calculation for allowance progress bars:
+ * - <= 70%: healthy (emerald)
+ * - 71-90%: warning (amber)
+ * - > 90%: critical (rose)
+ */
+export declare function getAllowanceThresholdState(currentValue: number, targetValue: number): AllowanceThresholdState;

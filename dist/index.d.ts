@@ -13,6 +13,7 @@ export * from './primitives/Modal';
 export * from './primitives/MultiSegmentBar';
 export * from './primitives/NumberInputDisplay';
 export * from './primitives/OptionCardGroup';
+export * from './primitives/ProgressBar';
 export * from './primitives/RangeSlider';
 export * from './primitives/SearchInput';
 export * from './primitives/SectionHeader';
