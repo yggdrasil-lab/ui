@@ -4,6 +4,7 @@ export interface StatusBadgeProps {
     label: string;
     variant?: StatusBadgeVariant;
     icon?: React.ReactNode;
+    showDot?: boolean;
     isPulsing?: boolean;
     className?: string;
 }

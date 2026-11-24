@@ -7,7 +7,7 @@ const meta: Meta<typeof ProgressBar> = {
   title: 'Primitives/ProgressBar',
   component: ProgressBar,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
 };
@@ -32,7 +32,7 @@ export const Default: Story = {
     label: 'Default gradient progress',
   },
   render: (args) => (
-    <div className="w-[380px] p-4 bg-card rounded-2xl border border-border">
+    <div className="w-full max-w-sm mx-auto p-4 bg-card rounded-2xl border border-border">
       <ProgressBar {...args} />
     </div>
   ),
@@ -40,7 +40,7 @@ export const Default: Story = {
 
 export const SolidTones: Story = {
   render: () => (
-    <div className="w-[380px] p-4 bg-card rounded-2xl border border-border space-y-3">
+    <div className="w-full max-w-sm mx-auto p-4 bg-card rounded-2xl border border-border space-y-3">
       {SOLID_TONES.map((tone, idx) => (
         <div key={tone} className="space-y-1">
           <div className="text-xs text-slate-400 font-mono">{tone}</div>
@@ -53,7 +53,7 @@ export const SolidTones: Story = {
 
 export const ThemeGradients: Story = {
   render: () => (
-    <div className="w-[380px] p-4 bg-card rounded-2xl border border-border space-y-3">
+    <div className="w-full max-w-sm mx-auto p-4 bg-card rounded-2xl border border-border space-y-3">
       {THEME_VARIANTS.map((variant) => (
         <div key={variant} className="space-y-1">
           <div className="text-xs text-slate-400 font-mono">{variant}</div>
@@ -71,7 +71,7 @@ export const ThemeGradients: Story = {
 
 export const SizesAndTransitions: Story = {
   render: () => (
-    <div className="w-[380px] p-4 bg-card rounded-2xl border border-border space-y-3">
+    <div className="w-full max-w-sm mx-auto p-4 bg-card rounded-2xl border border-border space-y-3">
       <div className="space-y-1">
         <div className="text-xs text-slate-400 font-mono">size=sm, transition=linear</div>
         <ProgressBar
@@ -98,7 +98,7 @@ export const SizesAndTransitions: Story = {
 
 export const EdgeValues: Story = {
   render: () => (
-    <div className="w-[380px] p-4 bg-card rounded-2xl border border-border space-y-3">
+    <div className="w-full max-w-sm mx-auto p-4 bg-card rounded-2xl border border-border space-y-3">
       <div className="space-y-1">
         <div className="text-xs text-slate-400 font-mono">0%</div>
         <ProgressBar value={0} label="Zero progress" />

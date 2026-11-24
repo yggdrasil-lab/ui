@@ -5,8 +5,11 @@ export type GlassCardPadding = 'none' | 'sm' | 'md' | 'lg';
 
 export type GlassCardTone = 'glass' | 'solid';
 
-export interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export type GlassCardElement = 'div' | 'nav' | 'section';
+
+export interface GlassCardProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
+  as?: GlassCardElement;
   padding?: GlassCardPadding;
   tone?: GlassCardTone;
   hoverGlow?: boolean;
@@ -26,6 +29,7 @@ const TONE_CLASSES: Record<GlassCardTone, string> = {
 
 export const GlassCard: React.FC<GlassCardProps> = ({
   children,
+  as = 'div',
   className,
   onClick,
   padding = 'lg',
@@ -34,9 +38,10 @@ export const GlassCard: React.FC<GlassCardProps> = ({
   ...rest
 }) => {
   const isClickable = Boolean(onClick);
+  const Component = as;
 
   return (
-    <div
+    <Component
       onClick={onClick}
       className={twMerge(
         'rounded-2xl shadow-lg',
@@ -49,6 +54,6 @@ export const GlassCard: React.FC<GlassCardProps> = ({
       {...rest}
     >
       {children}
-    </div>
+    </Component>
   );
 };

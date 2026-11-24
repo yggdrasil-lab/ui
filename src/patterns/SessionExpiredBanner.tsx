@@ -1,5 +1,8 @@
 import React from 'react';
 import { AlertTriangle } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
+import { Button } from '../primitives/Button';
+import { GlassCard } from '../primitives/GlassCard';
 
 export interface SessionExpiredBannerProps {
   /**
@@ -52,12 +55,16 @@ export const SessionExpiredBanner: React.FC<SessionExpiredBannerProps> = ({
   };
 
   return (
-    <div
+    <GlassCard
       role="alert"
       aria-live="assertive"
       data-testid={testId}
       onClick={handleReauth}
-      className={`glass-panel flex items-center justify-between p-3.5 px-4 rounded-xl border border-rose-500/50 bg-rose-950/30 text-slate-100 shadow-lg shadow-rose-950/20 backdrop-blur-md transition-all cursor-pointer select-none animate-slide-up ${className}`}
+      padding="none"
+      className={twMerge(
+        'flex items-center justify-between p-3.5 px-4 rounded-xl border-rose-500/50 bg-rose-950/30 text-slate-100 shadow-rose-950/20 transition-all animate-slide-up',
+        className
+      )}
     >
       <div className="flex items-center gap-2.5 min-w-0 pr-2">
         {icon ? (
@@ -69,13 +76,14 @@ export const SessionExpiredBanner: React.FC<SessionExpiredBannerProps> = ({
           {message}
         </span>
       </div>
-      <button
-        type="button"
+      <Button
+        variant="rose"
+        size="sm"
         onClick={handleReauth}
-        className="px-3 py-1.5 bg-rose-600 hover:bg-rose-500 active:scale-95 text-white font-semibold text-xs rounded-lg shadow-md transition-all shrink-0"
+        className="rounded-lg font-semibold shadow-md shrink-0"
       >
         {actionLabel}
-      </button>
-    </div>
+      </Button>
+    </GlassCard>
   );
 };

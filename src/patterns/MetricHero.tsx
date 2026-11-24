@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Sparkles } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
+import { GlassCard } from '../primitives/GlassCard';
+import { StatusBadge, type StatusBadgeVariant } from '../primitives/StatusBadge';
 import {
   THEME_GLOW_BG,
   THEME_TEXT_COLORS,
@@ -11,6 +14,22 @@ export interface MetricHeroBadge {
   variant?: 'amber' | 'emerald' | 'sky' | 'rose' | 'blue';
   icon?: React.ReactNode;
 }
+
+const METRIC_HERO_BADGE_STYLES: Record<NonNullable<MetricHeroBadge['variant']>, string> = {
+  emerald: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
+  sky: 'bg-sky-500/20 text-sky-300 border-sky-500/40',
+  rose: 'bg-rose-500/20 text-rose-300 border-rose-500/40',
+  amber: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
+  blue: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
+};
+
+const METRIC_HERO_BADGE_VARIANTS: Record<NonNullable<MetricHeroBadge['variant']>, StatusBadgeVariant> = {
+  emerald: 'success',
+  sky: 'info',
+  rose: 'error',
+  amber: 'warning',
+  blue: 'info',
+};
 
 export interface MetricHeroProps {
   title: string;
@@ -43,27 +62,17 @@ export const MetricHero: React.FC<MetricHeroProps> = ({
 }) => {
   const [showSecondary, setShowSecondary] = useState(false);
 
-  const getBadgeStyle = (bVariant: MetricHeroBadge['variant'] = 'blue') => {
-    switch (bVariant) {
-      case 'emerald':
-        return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
-      case 'sky':
-        return 'bg-sky-500/20 text-sky-300 border-sky-500/40';
-      case 'rose':
-        return 'bg-rose-500/20 text-rose-300 border-rose-500/40';
-      case 'amber':
-        return 'bg-amber-500/20 text-amber-300 border-amber-500/40';
-      default:
-        return 'bg-blue-500/20 text-blue-300 border-blue-500/40';
-    }
-  };
-
+  const badgeKey = badge?.variant ?? 'blue';
   const isToggleable = secondaryValue !== undefined && secondaryUnit !== undefined;
   const unitClass = unitColor || THEME_TEXT_COLORS[variant] || THEME_TEXT_COLORS.blue;
   const glowClass = glowColor || THEME_GLOW_BG[variant] || THEME_GLOW_BG.blue;
 
   return (
-    <div className={`bg-card border border-border rounded-2xl p-6 shadow-xl relative overflow-hidden ${className}`}>
+    <GlassCard
+      tone="solid"
+      padding="none"
+      className={twMerge('p-6 shadow-xl relative overflow-hidden', className)}
+    >
       {/* Background glow */}
       <div
         className={`absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 ${glowClass} rounded-full blur-3xl pointer-events-none`}
@@ -75,10 +84,12 @@ export const MetricHero: React.FC<MetricHeroProps> = ({
           {title}
         </span>
         {badge && (
-          <div className={`flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${getBadgeStyle(badge.variant)}`}>
-            {badge.icon || <Sparkles className="w-3.5 h-3.5 mr-1" />}
-            <span>{badge.label}</span>
-          </div>
+          <StatusBadge
+            label={badge.label}
+            variant={METRIC_HERO_BADGE_VARIANTS[badgeKey]}
+            icon={badge.icon || <Sparkles className="w-3.5 h-3.5" />}
+            className={METRIC_HERO_BADGE_STYLES[badgeKey]}
+          />
         )}
       </div>
 
@@ -101,6 +112,6 @@ export const MetricHero: React.FC<MetricHeroProps> = ({
       </div>
 
       {children}
-    </div>
+    </GlassCard>
   );
 };

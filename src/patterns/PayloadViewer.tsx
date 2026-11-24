@@ -1,6 +1,10 @@
 import React, { useId, useMemo, useState } from 'react';
 import { Check, ChevronDown, ChevronRight, Copy } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
 import { useCopyFeedback } from '../hooks/useCopyFeedback';
+import { Button } from '../primitives/Button';
+import { GlassCard } from '../primitives/GlassCard';
+import { StatusBadge } from '../primitives/StatusBadge';
 
 export type PayloadInput = string | Record<string, unknown> | unknown[] | null | undefined;
 
@@ -164,6 +168,103 @@ function formatPayload(payload: PayloadInput, redactKeys: string[]): FormattedPa
   };
 }
 
+interface PayloadHeaderProps {
+  title: string;
+  subtitle?: string;
+  panelId: string;
+  isExpanded: boolean;
+  onToggle: () => void;
+  summaryBadge: string;
+  isEmpty: boolean;
+  isCopied: boolean;
+  onCopy: () => void;
+}
+
+const PayloadHeader: React.FC<PayloadHeaderProps> = ({
+  title,
+  subtitle,
+  panelId,
+  isExpanded,
+  onToggle,
+  summaryBadge,
+  isEmpty,
+  isCopied,
+  onCopy,
+}) => (
+  <div className="flex flex-wrap items-center justify-between gap-2 px-3.5 py-2.5 min-w-0">
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-expanded={isExpanded}
+      aria-controls={panelId}
+      className="flex-1 min-w-[180px] min-h-[44px] flex items-center gap-2 text-left bg-transparent border-0 p-0 cursor-pointer rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/60"
+    >
+      {isExpanded ? (
+        <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
+      ) : (
+        <ChevronRight className="w-4 h-4 text-slate-400 shrink-0" />
+      )}
+      <div className="min-w-0 flex-1">
+        <div className="text-sm sm:text-xs font-semibold text-slate-100 truncate">{title}</div>
+        {subtitle && <div className="text-xs text-slate-400 truncate mt-0.5">{subtitle}</div>}
+      </div>
+    </button>
+
+    <div className="flex items-center gap-2 shrink-0 max-w-full">
+      <StatusBadge
+        label={summaryBadge}
+        variant="idle"
+        showDot={false}
+        className="text-[11px] font-mono whitespace-nowrap"
+      />
+
+      <Button
+        variant="secondary"
+        size="sm"
+        disabled={isEmpty}
+        onClick={onCopy}
+        aria-label={isCopied ? `Copied ${title}` : `Copy ${title}`}
+        data-copied={isCopied ? 'true' : 'false'}
+        icon={isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+        className={twMerge(
+          'min-h-[44px] min-w-[44px] px-2.5 font-medium shadow-none disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/60',
+          isCopied
+            ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/20 hover:text-emerald-200'
+            : 'bg-background/70 border-border/70 text-slate-300 hover:text-white hover:bg-slate-800'
+        )}
+      >
+        {isCopied ? 'Copied' : 'Copy'}
+      </Button>
+    </div>
+  </div>
+);
+
+interface PayloadBodyProps {
+  panelId: string;
+  formatted: FormattedPayload;
+  emptyMessage: string;
+  maxHeightClassName: string;
+}
+
+const PayloadBody: React.FC<PayloadBodyProps> = ({
+  panelId,
+  formatted,
+  emptyMessage,
+  maxHeightClassName,
+}) => (
+  <div id={panelId} className="border-t border-border/60 bg-background/80 p-3 min-w-0 max-w-full">
+    {formatted.isEmpty ? (
+      <div className="px-2 py-3 text-xs text-slate-400 text-center">{emptyMessage}</div>
+    ) : (
+      <pre
+        className={`overflow-x-auto overflow-y-auto ${maxHeightClassName} w-full max-w-full m-0 p-3 rounded-xl bg-background border border-border/60 font-mono text-xs leading-relaxed text-slate-200 whitespace-pre`}
+      >
+        {formatted.text}
+      </pre>
+    )}
+  </div>
+);
+
 /**
  * Collapsible sanitized monospace JSON/text inspector with byte/line metrics,
  * clipboard copy confirmation, and bounded scrolling to prevent mobile overflow.
@@ -188,77 +289,29 @@ export const PayloadViewer: React.FC<PayloadViewerProps> = ({
   const summaryBadge = `${formatted.formatLabel} | ${formatByteSize(formatted.bytes)} | ${lineLabel}`;
 
   return (
-    <div
-      className={`w-full min-w-0 max-w-full overflow-hidden rounded-2xl bg-card/70 backdrop-blur-md border border-border/80 shadow-lg ${className}`}
+    <GlassCard
+      padding="none"
+      className={twMerge('w-full min-w-0 max-w-full overflow-hidden', className)}
     >
-      <div className="flex flex-wrap items-center justify-between gap-2 px-3.5 py-2.5 min-w-0">
-        <button
-          type="button"
-          onClick={() => setIsExpanded((prev) => !prev)}
-          aria-expanded={isExpanded}
-          aria-controls={panelId}
-          className="flex-1 min-w-[180px] min-h-[44px] flex items-center gap-2 text-left bg-transparent border-0 p-0 cursor-pointer rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/60"
-        >
-          {isExpanded ? (
-            <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
-          ) : (
-            <ChevronRight className="w-4 h-4 text-slate-400 shrink-0" />
-          )}
-          <div className="min-w-0 flex-1">
-            <div className="text-sm sm:text-xs font-semibold text-slate-100 truncate">
-              {title}
-            </div>
-            {subtitle && (
-              <div className="text-xs text-slate-400 truncate mt-0.5">{subtitle}</div>
-            )}
-          </div>
-        </button>
-
-        <div className="flex items-center gap-2 shrink-0 max-w-full">
-          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-mono bg-slate-800/80 text-slate-300 border border-slate-700/60 whitespace-nowrap">
-            {summaryBadge}
-          </span>
-
-          <button
-            type="button"
-            disabled={formatted.isEmpty}
-            onClick={() => void copyText(formatted.text, 'payload')}
-            aria-label={isCopied ? `Copied ${title}` : `Copy ${title}`}
-            data-copied={isCopied ? 'true' : 'false'}
-            className={`min-h-[44px] min-w-[44px] inline-flex items-center justify-center gap-1.5 px-2.5 rounded-xl border text-xs font-medium transition-colors disabled:opacity-40 disabled:pointer-events-none focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/60 ${
-              isCopied
-                ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-300'
-                : 'bg-background/70 border-border/70 text-slate-300 hover:text-white hover:bg-slate-800'
-            }`}
-          >
-            {isCopied ? (
-              <>
-                <Check className="w-4 h-4 shrink-0" />
-                <span>Copied</span>
-              </>
-            ) : (
-              <>
-                <Copy className="w-4 h-4 shrink-0" />
-                <span>Copy</span>
-              </>
-            )}
-          </button>
-        </div>
-      </div>
-
+      <PayloadHeader
+        title={title}
+        subtitle={subtitle}
+        panelId={panelId}
+        isExpanded={isExpanded}
+        onToggle={() => setIsExpanded((prev) => !prev)}
+        summaryBadge={summaryBadge}
+        isEmpty={formatted.isEmpty}
+        isCopied={isCopied}
+        onCopy={() => void copyText(formatted.text, 'payload')}
+      />
       {isExpanded && (
-        <div id={panelId} className="border-t border-border/60 bg-background/80 p-3 min-w-0 max-w-full">
-          {formatted.isEmpty ? (
-            <div className="px-2 py-3 text-xs text-slate-400 text-center">{emptyMessage}</div>
-          ) : (
-            <pre
-              className={`overflow-x-auto overflow-y-auto ${maxHeightClassName} w-full max-w-full m-0 p-3 rounded-xl bg-background border border-border/60 font-mono text-xs leading-relaxed text-slate-200 whitespace-pre`}
-            >
-              {formatted.text}
-            </pre>
-          )}
-        </div>
+        <PayloadBody
+          panelId={panelId}
+          formatted={formatted}
+          emptyMessage={emptyMessage}
+          maxHeightClassName={maxHeightClassName}
+        />
       )}
-    </div>
+    </GlassCard>
   );
 };

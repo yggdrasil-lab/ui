@@ -7,7 +7,7 @@ const meta: Meta<typeof AlertBanner> = {
   title: 'Primitives/AlertBanner',
   component: AlertBanner,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
 };
@@ -17,7 +17,7 @@ type Story = StoryObj<typeof AlertBanner>;
 
 export const AutoregulationInfo: Story = {
   render: () => (
-    <div className="w-96 space-y-3">
+    <div className="w-full max-w-sm mx-auto space-y-3">
       <AlertBanner
         variant="info"
         icon="🧠"

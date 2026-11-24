@@ -7,7 +7,7 @@ const meta: Meta<typeof AllowanceProgressBar> = {
   title: 'Patterns/AllowanceProgressBar',
   component: AllowanceProgressBar,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
 };
@@ -17,7 +17,7 @@ type Story = StoryObj<typeof AllowanceProgressBar>;
 
 export const UnderBudget: Story = {
   render: () => (
-    <div className="w-[420px]">
+    <div className="w-full max-w-md mx-auto">
       <AllowanceProgressBar
         title="Weekly Burn & Budget"
         subtitle="Resets Monday 00:00 NZDT"
@@ -38,7 +38,7 @@ export const UnderBudget: Story = {
 
 export const OverBudget: Story = {
   render: () => (
-    <div className="w-[420px]">
+    <div className="w-full max-w-md mx-auto">
       <AllowanceProgressBar
         title="Weekly Burn & Budget"
         subtitle="Resets Monday 00:00 NZDT"

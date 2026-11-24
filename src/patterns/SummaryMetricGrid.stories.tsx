@@ -6,7 +6,7 @@ const meta: Meta<typeof SummaryMetricGrid> = {
   title: 'Patterns/SummaryMetricGrid',
   component: SummaryMetricGrid,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
 };
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof SummaryMetricGrid>;
 
 export const ThreeColumnWorkoutSummary: Story = {
   render: () => (
-    <div className="w-[420px] p-4 bg-card rounded-2xl border border-border">
+    <div className="w-full max-w-md mx-auto p-4 bg-card rounded-2xl border border-border">
       <SummaryMetricGrid
         columns={3}
         items={[
@@ -31,7 +31,7 @@ export const ThreeColumnWorkoutSummary: Story = {
 
 export const FourColumnFinancialInspection: Story = {
   render: () => (
-    <div className="w-[480px] p-4 bg-card rounded-2xl border border-border">
+    <div className="w-full max-w-lg mx-auto p-4 bg-card rounded-2xl border border-border">
       <SummaryMetricGrid
         columns={4}
         items={[
@@ -90,7 +90,7 @@ const InteractiveMixedPreview: React.FC = () => {
   };
 
   return (
-    <div className="w-[358px] sm:w-[390px] max-w-full p-4 bg-card rounded-2xl border border-border space-y-3">
+    <div className="w-full max-w-sm mx-auto p-4 bg-card rounded-2xl border border-border space-y-3">
       <SummaryMetricGrid columns={3} items={buildInteractiveItems(handleSelectFlow)} />
       <div
         data-testid="interactive-summary-status"

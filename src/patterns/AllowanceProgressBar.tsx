@@ -64,15 +64,17 @@ interface AllowanceHeaderProps {
 }
 
 const AllowanceHeader: React.FC<AllowanceHeaderProps> = ({ title, subtitle, icon, action }) => (
-  <div className="flex items-center justify-between mb-3">
-    <div className="flex items-center space-x-2">
-      {Boolean(icon) && <div className="p-1.5 rounded-lg bg-amber-500/10 text-amber-400">{icon}</div>}
-      <div>
+  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+    <div className="flex items-center gap-2 min-w-0 flex-1">
+      {Boolean(icon) && (
+        <div className="p-1.5 rounded-lg bg-amber-500/10 text-amber-400 shrink-0">{icon}</div>
+      )}
+      <div className="min-w-0">
         <h3 className="text-sm font-semibold text-slate-200">{title}</h3>
         {Boolean(subtitle) && <p className="text-xs text-slate-400">{subtitle}</p>}
       </div>
     </div>
-    {Boolean(action) && <div>{action}</div>}
+    {Boolean(action) && <div className="shrink-0">{action}</div>}
   </div>
 );
 
@@ -87,7 +89,7 @@ interface AllowanceMeterProps {
 
 const AllowanceMeter: React.FC<AllowanceMeterProps> = (props) => (
   <div className="space-y-1.5 my-3">
-    <div className="flex justify-between text-xs">
+    <div className="flex flex-wrap justify-between items-baseline gap-2 text-xs">
       <span className="text-slate-400">
         Spent{' '}
         <strong className="text-slate-200">
@@ -97,7 +99,7 @@ const AllowanceMeter: React.FC<AllowanceMeterProps> = (props) => (
         of {props.currencyPrefix}
         {Math.round(props.targetValue).toLocaleString('en-NZ')}
       </span>
-      <span className={props.percentTextColor}>{props.percent}%</span>
+      <span className={`${props.percentTextColor} shrink-0 tabular-nums`}>{props.percent}%</span>
     </div>
     <ProgressBar
       value={props.percent}
@@ -118,7 +120,7 @@ interface AllowanceFooterProps {
 const AllowanceFooter: React.FC<AllowanceFooterProps> = (props) => {
   const { remaining, currencyPrefix, currencySuffix, deltaBadge } = props;
   return (
-    <div className="flex items-center justify-between pt-2 border-t border-border/50 text-xs">
+    <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 pt-2 border-t border-border/50 text-xs">
       <span className="text-slate-400">
         Remaining allowance:{' '}
         <strong className="text-slate-200">
@@ -128,7 +130,7 @@ const AllowanceFooter: React.FC<AllowanceFooterProps> = (props) => {
       </span>
       {deltaBadge && (
         <div
-          className={`flex items-center font-medium px-2 py-0.5 rounded-md ${
+          className={`flex items-center font-medium px-2 py-0.5 rounded-md shrink-0 whitespace-nowrap ${
             deltaBadge.isPositive ? 'text-emerald-300 bg-emerald-500/10' : 'text-rose-300 bg-rose-500/10'
           }`}
         >

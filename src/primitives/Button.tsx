@@ -1,5 +1,6 @@
 import React from 'react';
 import { Loader2 } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
 
 export type ButtonVariant =
   | 'primary'
@@ -71,15 +72,25 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const isDisabled = disabled || loading;
+    const labelContent = loading && loadingText ? loadingText : children;
+    const hasLabel =
+      labelContent !== undefined &&
+      labelContent !== null &&
+      labelContent !== false &&
+      labelContent !== '';
 
     return (
       <button
         ref={ref}
         type={type}
         disabled={isDisabled}
-        className={`inline-flex items-center justify-center transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100 select-none ${
-          variantStyles[variant]
-        } ${sizeStyles[size]} ${fullWidth ? 'w-full' : ''} ${className}`}
+        className={twMerge(
+          'inline-flex items-center justify-center transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100 select-none',
+          variantStyles[variant],
+          sizeStyles[size],
+          fullWidth && 'w-full',
+          className
+        )}
         {...rest}
       >
         {loading ? (
@@ -88,7 +99,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <span className="shrink-0">{icon}</span>
         ) : null}
 
-        <span>{loading && loadingText ? loadingText : children}</span>
+        {hasLabel && <span>{labelContent}</span>}
 
         {!loading && icon && iconPosition === 'right' ? (
           <span className="shrink-0">{icon}</span>
