@@ -4,6 +4,7 @@ import { twMerge } from 'tailwind-merge';
 
 export type ButtonVariant =
   | 'primary'
+  | 'brand'
   | 'amber'
   | 'blue'
   | 'emerald'
@@ -27,7 +28,9 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-amber-500 hover:bg-amber-400 active:bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/10 border border-transparent',
+    'bg-accent hover:opacity-90 active:opacity-95 text-accent-fg font-bold shadow-lg border border-transparent',
+  brand:
+    'bg-accent hover:opacity-90 active:opacity-95 text-accent-fg font-bold shadow-lg border border-transparent',
   amber:
     'bg-amber-500 hover:bg-amber-400 active:bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/10 border border-transparent',
   blue:
@@ -47,10 +50,10 @@ const variantStyles: Record<ButtonVariant, string> = {
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  xs: 'px-2.5 py-1 text-xs rounded-lg gap-1.5',
-  sm: 'px-3 py-1.5 text-xs rounded-xl gap-1.5',
-  md: 'px-4 py-2.5 text-xs sm:text-sm rounded-xl gap-2',
-  lg: 'px-5 py-3.5 text-sm sm:text-base rounded-xl gap-2',
+  xs: 'px-2.5 py-1 text-xs rounded-ui-control gap-1.5',
+  sm: 'px-3 py-1.5 text-xs rounded-ui-control gap-1.5',
+  md: 'px-4 py-2.5 text-xs sm:text-sm rounded-ui-control gap-2',
+  lg: 'px-5 py-3.5 text-sm sm:text-base rounded-ui-control gap-2',
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(

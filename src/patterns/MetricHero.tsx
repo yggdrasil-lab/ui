@@ -80,7 +80,7 @@ export const MetricHero: React.FC<MetricHeroProps> = ({
 
       {/* Header and status badge */}
       <div className="flex items-center justify-between mb-4">
-        <span className="text-xs font-semibold tracking-wider uppercase text-slate-400">
+        <span className="text-xs font-semibold tracking-[var(--ui-eyebrow-tracking)] uppercase text-muted">
           {title}
         </span>
         {badge && (
@@ -98,14 +98,14 @@ export const MetricHero: React.FC<MetricHeroProps> = ({
         className={`text-center my-6 ${isToggleable ? 'cursor-pointer select-none' : ''}`}
         onClick={() => isToggleable && setShowSecondary(!showSecondary)}
       >
-        <div className="text-5xl sm:text-6xl font-black text-slate-50 tracking-tight">
+        <div className="text-5xl sm:text-6xl font-black font-display text-foreground tracking-[var(--ui-display-tracking)]">
           {showSecondary ? secondaryValue : primaryValue}
           <span className={`text-2xl font-semibold ${unitClass} ml-2`}>
             {showSecondary ? secondaryUnit : primaryUnit}
           </span>
         </div>
         {toggleHint && (
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-muted mt-1">
             {toggleHint}
           </p>
         )}

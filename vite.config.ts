@@ -1,3 +1,4 @@
+import { copyFileSync, mkdirSync } from 'fs';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -11,6 +12,16 @@ export default defineConfig({
       exclude: ['src/**/*.stories.tsx'],
       insertTypesEntry: true,
     }),
+    {
+      name: 'copy-tailwind-preset',
+      closeBundle() {
+        mkdirSync(resolve(__dirname, 'dist'), { recursive: true });
+        copyFileSync(
+          resolve(__dirname, 'tailwind-preset.js'),
+          resolve(__dirname, 'dist/tailwind-preset.js')
+        );
+      },
+    },
   ],
   build: {
     lib: {

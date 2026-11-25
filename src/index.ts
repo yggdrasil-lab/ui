@@ -2,6 +2,7 @@
 import './styles/globals.css';
 
 // Theme & Variants
+export * from './theme/themes';
 export * from './theme/variants';
 
 // Shells

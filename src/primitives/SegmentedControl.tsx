@@ -41,7 +41,7 @@ export function SegmentedControl<T extends string = string>({
   return (
     <div
       role="tablist"
-      className={`inline-flex items-center bg-card/60 p-0.5 rounded-lg border border-border ${
+      className={`inline-flex items-center bg-card/60 p-0.5 rounded-ui-control border border-border ${
         fullWidth ? 'w-full grid' : ''
       } ${className}`}
       style={fullWidth ? { gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` } : undefined}
@@ -56,10 +56,10 @@ export function SegmentedControl<T extends string = string>({
             type="button"
             data-testid={`${idPrefix}-${option.id}`}
             onClick={() => onChange(option.id)}
-            className={`font-medium rounded-md border transition-all duration-150 flex items-center justify-center gap-1.5 ${sizeClass} ${
+            className={`font-medium rounded-ui-control border transition-all duration-150 flex items-center justify-center gap-1.5 ${sizeClass} ${
               isSelected
                 ? `${activeClass} font-semibold`
-                : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                : 'border-transparent text-muted hover:text-foreground hover:bg-card-muted/60'
             }`}
           >
             {option.icon && <span className="shrink-0">{option.icon}</span>}

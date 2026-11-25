@@ -44,7 +44,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
     <Component
       onClick={onClick}
       className={twMerge(
-        'rounded-2xl shadow-lg',
+        'rounded-ui-card shadow-ui-card',
         TONE_CLASSES[tone],
         PADDING_CLASSES[padding],
         hoverGlow && 'hover:border-border transition-all duration-200 hover:shadow-xl',

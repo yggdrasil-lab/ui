@@ -14,7 +14,7 @@ export const AppShell: React.FC<AppShellProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`min-h-screen bg-background text-slate-100 flex flex-col justify-between w-full selection:bg-amber-500 selection:text-black ${className}`}>
+    <div className={`min-h-screen bg-background text-foreground flex flex-col justify-between w-full selection:bg-accent selection:text-accent-fg ${className}`}>
       {header}
 
       {/* Main Content Area with mobile safe padding clearance above bottom nav */}

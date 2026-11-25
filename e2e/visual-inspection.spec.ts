@@ -1,4 +1,14 @@
-import { test, expect, devices } from '@playwright/test';
+import { test, expect, devices, type Locator } from '@playwright/test';
+
+const readThemeTokens = async (locator: Locator) =>
+  locator.evaluate((el) => {
+    const styles = getComputedStyle(el);
+    return {
+      bg: styles.getPropertyValue('--ui-bg').trim(),
+      accent: styles.getPropertyValue('--ui-accent').trim(),
+      radiusCard: styles.getPropertyValue('--ui-radius-card').trim(),
+    };
+  });
 
 const PLATFORMS = [
   {
@@ -135,6 +145,28 @@ for (const { name: platform, options } of PLATFORMS) {
       await page.getByTestId('controlled-section-toggle').click();
       await expect(page.getByText('State: Closed')).toBeVisible();
       await page.screenshot({ path: `screenshots/${platform}/22-controlled-collapsible-section.png` });
+
+      // 13. Multi-App Theme Showcase & CSS Token Verification
+      await page.goto('/iframe.html?id=theme-themeshowcase--all-app-themes&viewMode=story');
+      const midasPanel = page.locator('[data-theme="midas"]');
+      const kratosPanel = page.locator('[data-theme="kratos"]');
+      const kairosPanel = page.locator('[data-theme="kairos"]');
+      await expect(midasPanel).toBeVisible();
+      await expect(kratosPanel).toBeVisible();
+      await expect(kairosPanel).toBeVisible();
+
+      const midasTokens = await readThemeTokens(midasPanel);
+      const kratosTokens = await readThemeTokens(kratosPanel);
+      const kairosTokens = await readThemeTokens(kairosPanel);
+
+      expect(midasTokens).toEqual({ bg: '11 10 8', accent: '212 160 56', radiusCard: '10px' });
+      expect(kratosTokens).toEqual({ bg: '9 9 11', accent: '244 63 94', radiusCard: '4px' });
+      expect(kairosTokens).toEqual({ bg: '17 15 22', accent: '196 181 253', radiusCard: '22px' });
+      expect(new Set([midasTokens.bg, kratosTokens.bg, kairosTokens.bg]).size).toBe(3);
+      expect(new Set([midasTokens.accent, kratosTokens.accent, kairosTokens.accent]).size).toBe(3);
+      expect(new Set([midasTokens.radiusCard, kratosTokens.radiusCard, kairosTokens.radiusCard]).size).toBe(3);
+
+      await page.screenshot({ path: `screenshots/${platform}/23-theme-showcase.png`, fullPage: true });
     });
   });
 }

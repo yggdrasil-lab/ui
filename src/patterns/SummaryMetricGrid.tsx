@@ -55,6 +55,10 @@ const THEME_TILE_CLASSES: Record<
     hover: 'hover:border-slate-400/50 focus-visible:ring-slate-400/60',
     active: 'border-slate-500/70 bg-slate-700/40 ring-1 ring-slate-500/30',
   },
+  brand: {
+    hover: 'hover:border-accent/50 focus-visible:ring-accent/60',
+    active: 'border-accent/60 bg-accent/10 ring-1 ring-accent/30',
+  },
 };
 
 const BASE_TILE_CLASSES =

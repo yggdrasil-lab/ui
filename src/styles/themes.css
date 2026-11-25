@@ -1,0 +1,100 @@
+:root {
+  color-scheme: dark;
+  --ui-bg: 9 13 22;
+  --ui-card: 17 24 39;
+  --ui-card-muted: 30 41 59;
+  --ui-border: 31 41 61;
+  --ui-text: 241 245 249;
+  --ui-text-muted: 148 163 184;
+  --ui-accent: 245 158 11;
+  --ui-accent-fg: 9 13 22;
+  --ui-secondary: 16 185 129;
+  --ui-header-bg: rgba(17, 24, 39, 0.90);
+  --ui-bg-image: none;
+  --ui-bg-size: auto;
+  --ui-radius-card: 16px;
+  --ui-radius-control: 10px;
+  --ui-radius-pill: 9999px;
+  --ui-font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ui-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ui-display-tracking: -0.015em;
+  --ui-eyebrow-tracking: 0.10em;
+  --ui-shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.35), 0 4px 6px -4px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="midas"] {
+  --ui-bg: 11 10 8;
+  --ui-card: 21 19 16;
+  --ui-card-muted: 30 26 20;
+  --ui-border: 46 40 31;
+  --ui-text: 247 243 235;
+  --ui-text-muted: 166 157 142;
+  --ui-accent: 212 160 56;
+  --ui-accent-fg: 11 10 8;
+  --ui-secondary: 52 211 153;
+  --ui-header-bg: rgba(18, 16, 12, 0.92);
+  --ui-bg-image: radial-gradient(circle at 85% 0%, rgba(212, 160, 56, 0.14), transparent 46%), radial-gradient(circle at 10% 95%, rgba(16, 185, 129, 0.08), transparent 40%);
+  --ui-bg-size: 100% 100%;
+  --ui-radius-card: 10px;
+  --ui-radius-control: 8px;
+  --ui-radius-pill: 6px;
+  --ui-font-display: Georgia, "Times New Roman", serif;
+  --ui-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ui-display-tracking: -0.02em;
+  --ui-eyebrow-tracking: 0.14em;
+  --ui-shadow-card: 0 10px 28px -14px rgba(0, 0, 0, 0.70);
+}
+
+[data-theme="kratos"] {
+  --ui-bg: 9 9 11;
+  --ui-card: 20 20 23;
+  --ui-card-muted: 29 29 34;
+  --ui-border: 43 43 50;
+  --ui-text: 250 250 250;
+  --ui-text-muted: 152 152 163;
+  --ui-accent: 244 63 94;
+  --ui-accent-fg: 255 255 255;
+  --ui-secondary: 251 146 60;
+  --ui-header-bg: rgba(16, 16, 20, 0.94);
+  --ui-bg-image: radial-gradient(circle at 90% 10%, rgba(244, 63, 94, 0.14), transparent 40%), linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  --ui-bg-size: 100% 100%, 22px 22px, 22px 22px;
+  --ui-radius-card: 4px;
+  --ui-radius-control: 3px;
+  --ui-radius-pill: 3px;
+  --ui-font-display: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --ui-font-body: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --ui-display-tracking: -0.035em;
+  --ui-eyebrow-tracking: 0.18em;
+  --ui-shadow-card: 0 4px 16px rgba(0, 0, 0, 0.65);
+}
+
+[data-theme="kairos"] {
+  --ui-bg: 17 15 22;
+  --ui-card: 26 23 34;
+  --ui-card-muted: 34 30 45;
+  --ui-border: 49 43 64;
+  --ui-text: 243 240 248;
+  --ui-text-muted: 168 159 189;
+  --ui-accent: 196 181 253;
+  --ui-accent-fg: 17 15 22;
+  --ui-secondary: 229 193 133;
+  --ui-header-bg: rgba(21, 18, 28, 0.90);
+  --ui-bg-image: radial-gradient(circle at 25% 15%, rgba(196, 181, 253, 0.13), transparent 48%), radial-gradient(circle at 80% 80%, rgba(229, 193, 133, 0.09), transparent 45%);
+  --ui-bg-size: 100% 100%;
+  --ui-radius-card: 22px;
+  --ui-radius-control: 16px;
+  --ui-radius-pill: 9999px;
+  --ui-font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ui-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ui-display-tracking: -0.01em;
+  --ui-eyebrow-tracking: 0.09em;
+  --ui-shadow-card: 0 14px 32px -16px rgba(0, 0, 0, 0.60);
+}
+
+[data-theme] {
+  background-color: rgb(var(--ui-bg));
+  background-image: var(--ui-bg-image);
+  background-size: var(--ui-bg-size);
+  color: rgb(var(--ui-text));
+  font-family: var(--ui-font-body);
+}

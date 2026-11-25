@@ -30,6 +30,7 @@ const SELECTED_SOFT_CLASSES: Record<ThemeVariant, string> = {
   emerald: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 font-semibold',
   purple: 'bg-purple-500/20 text-purple-300 border-purple-500/40 font-semibold',
   slate: 'bg-slate-700/50 text-slate-100 border-slate-500 font-semibold',
+  brand: 'bg-accent/15 text-accent border-accent/40 font-semibold',
 };
 
 const SELECTED_SOLID_CLASSES: Record<ThemeVariant, string> = {
@@ -38,6 +39,7 @@ const SELECTED_SOLID_CLASSES: Record<ThemeVariant, string> = {
   emerald: 'bg-emerald-500 text-slate-950 border-emerald-400 font-bold',
   purple: 'bg-purple-600 text-white border-purple-500 font-bold',
   slate: 'bg-slate-200 text-slate-950 border-slate-300 font-bold',
+  brand: 'bg-accent text-accent-fg border-accent font-bold',
 };
 
 const HIGHLIGHT_CLASSES: Record<ThemeVariant, string> = {
@@ -46,6 +48,7 @@ const HIGHLIGHT_CLASSES: Record<ThemeVariant, string> = {
   emerald: 'bg-emerald-500/10 text-emerald-200 border-emerald-500/25 hover:border-emerald-500/40',
   purple: 'bg-purple-500/10 text-purple-200 border-purple-500/25 hover:border-purple-500/40',
   slate: 'bg-slate-700/30 text-slate-200 border-slate-600/50 hover:border-slate-500',
+  brand: 'bg-accent/10 text-accent border-accent/25 hover:border-accent/40',
 };
 
 const SIZE_CLASSES: Record<'xs' | 'sm', string> = {

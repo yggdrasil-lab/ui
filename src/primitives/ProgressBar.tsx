@@ -9,6 +9,7 @@ export type ProgressBarTone =
   | 'blue'
   | 'purple'
   | 'slate'
+  | 'brand'
   | 'gradient';
 
 export type ProgressBarSize = 'sm' | 'md';
@@ -36,6 +37,7 @@ const TONE_CLASSES: Record<Exclude<ProgressBarTone, 'gradient'>, string> = {
   blue: 'bg-blue-500',
   purple: 'bg-purple-500',
   slate: 'bg-slate-400',
+  brand: 'bg-gradient-to-r from-accent to-secondary',
 };
 
 const SIZE_CLASSES: Record<ProgressBarSize, string> = {
@@ -62,14 +64,14 @@ export const ProgressBar: React.FC<ProgressBarProps> = (props) => {
       aria-valuenow={Math.round(pct)}
       aria-label={label || undefined}
       className={twMerge(
-        'w-full rounded-full bg-background border border-border/50 overflow-hidden',
+        'w-full rounded-ui-pill bg-background border border-border/50 overflow-hidden',
         SIZE_CLASSES[size],
         trackClassName,
         className
       )}
     >
       <div
-        className={twMerge('h-full rounded-full transition-all', TRANSITION_CLASSES[transition], fillToneClass, fillClassName)}
+        className={twMerge('h-full rounded-ui-pill transition-all', TRANSITION_CLASSES[transition], fillToneClass, fillClassName)}
         style={{ width: `${pct}%` }}
       />
     </div>
