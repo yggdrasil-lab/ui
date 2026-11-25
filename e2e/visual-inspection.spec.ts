@@ -86,5 +86,55 @@ for (const { name: platform, options } of PLATFORMS) {
         path: `screenshots/${platform}/16-budget-progress-row.png`,
       });
     });
+
+    test(`verifies v0.8.0 Midas extraction components and controlled CollapsibleSection on ${platform}`, async ({
+      page,
+    }) => {
+      // 7. FilterChipBar
+      await page.goto('/iframe.html?id=primitives-filterchipbar--status-filters&viewMode=story');
+      const groceriesBtn = page.getByRole('button', { name: 'Groceries' });
+      await expect(groceriesBtn).toBeVisible();
+      await groceriesBtn.click();
+      await expect(groceriesBtn).toHaveAttribute('aria-pressed', 'true');
+      await groceriesBtn.click();
+      await expect(groceriesBtn).toHaveAttribute('aria-pressed', 'false');
+      await page.screenshot({ path: `screenshots/${platform}/17-filter-chip-bar.png` });
+
+      // 8. ActionTile
+      await page.goto('/iframe.html?id=patterns-actiontile--tools-grid&viewMode=story');
+      await expect(page.getByTestId('tile-receipts')).toBeVisible();
+      await expect(page.getByTestId('tile-categories')).toBeDisabled();
+      await page.screenshot({ path: `screenshots/${platform}/18-action-tile.png` });
+
+      // 9. DeltaBadge
+      await page.goto('/iframe.html?id=patterns-deltabadge--showcase&viewMode=story');
+      await expect(page.getByText('+$12.50')).toBeVisible();
+      await expect(page.getByText('-$4.25')).toBeVisible();
+      await page.screenshot({ path: `screenshots/${platform}/19-delta-badge.png` });
+
+      // 10. InlineNotesEditor
+      await page.goto('/iframe.html?id=patterns-inlinenoteseditor--populated-and-empty&viewMode=story');
+      await expect(page.getByText('Notes & Observations')).toBeVisible();
+      await page.getByRole('button', { name: 'Edit' }).first().click();
+      await expect(page.getByRole('button', { name: 'Save Note' })).toBeVisible();
+      await page.screenshot({ path: `screenshots/${platform}/20-inline-notes-editor.png` });
+
+      // 11. LoadMoreFooter
+      await page.goto('/iframe.html?id=patterns-loadmorefooter--interactive-pagination&viewMode=story');
+      await expect(page.getByText('Showing 25 of 64', { exact: true })).toBeVisible();
+      await page.getByTestId('demo-load-more-btn').click();
+      await expect(page.getByText('Showing 50 of 64', { exact: true })).toBeVisible();
+      await page.screenshot({ path: `screenshots/${platform}/21-load-more-footer.png` });
+
+      // 12. Controlled CollapsibleSection with headerActions
+      await page.goto('/iframe.html?id=patterns-collapsiblesection--controlled-with-header-actions&viewMode=story');
+      await expect(page.getByText('State: Open')).toBeVisible();
+      await page.getByRole('button', { name: 'Delete receipt' }).click();
+      await expect(page.getByText('Action clicks: 1')).toBeVisible();
+      await expect(page.getByText('State: Open')).toBeVisible();
+      await page.getByTestId('controlled-section-toggle').click();
+      await expect(page.getByText('State: Closed')).toBeVisible();
+      await page.screenshot({ path: `screenshots/${platform}/22-controlled-collapsible-section.png` });
+    });
   });
 }
