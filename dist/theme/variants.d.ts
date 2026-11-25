@@ -1,4 +1,4 @@
-export type ThemeVariant = 'amber' | 'blue' | 'emerald' | 'purple' | 'slate';
+export type ThemeVariant = 'amber' | 'blue' | 'emerald' | 'purple' | 'slate' | 'brand';
 export type AccentVariant = ThemeVariant | 'rose' | 'sky' | 'orange';
 export declare const THEME_TEXT_COLORS: Record<ThemeVariant, string>;
 export declare const THEME_VALUE_COLORS: Record<ThemeVariant, string>;
@@ -19,4 +19,4 @@ export declare const THEME_GOAL_GRADIENT: Record<ThemeVariant, {
     eyebrow: string;
     bar: string;
 }>;
-export declare const THEME_BUTTON_VARIANT: Record<ThemeVariant, 'amber' | 'blue' | 'emerald' | 'secondary'>;
+export declare const THEME_BUTTON_VARIANT: Record<ThemeVariant, 'amber' | 'blue' | 'emerald' | 'secondary' | 'brand'>;

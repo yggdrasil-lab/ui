@@ -21,6 +21,7 @@ const ICON_BOX_STYLES: Record<ThemeVariant, string> = {
   emerald: 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/25',
   purple: 'bg-purple-500/15 text-purple-400 border border-purple-500/25',
   slate: 'bg-slate-700/40 text-slate-300 border border-slate-600/40',
+  brand: 'bg-accent/15 text-accent border border-accent/25',
 };
 
 /**

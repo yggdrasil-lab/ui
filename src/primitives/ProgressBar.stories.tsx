@@ -22,9 +22,10 @@ const SOLID_TONES: Exclude<ProgressBarTone, 'gradient'>[] = [
   'blue',
   'purple',
   'slate',
+  'brand',
 ];
 
-const THEME_VARIANTS: ThemeVariant[] = ['amber', 'blue', 'emerald', 'purple', 'slate'];
+const THEME_VARIANTS: ThemeVariant[] = ['amber', 'blue', 'emerald', 'purple', 'slate', 'brand'];
 
 export const Default: Story = {
   args: {

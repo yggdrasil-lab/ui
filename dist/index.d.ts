@@ -1,3 +1,4 @@
+export * from './theme/themes';
 export * from './theme/variants';
 export * from './shells/AppShell';
 export * from './shells/AppHeader';

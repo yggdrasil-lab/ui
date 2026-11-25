@@ -22,6 +22,7 @@ const iconBadgeVariants: Record<AccentVariant, string> = {
   rose: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
   sky: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
   orange: 'bg-orange-500/10 text-orange-400 border-orange-500/20',
+  brand: 'bg-accent/15 text-accent border-accent/25',
 };
 
 /**

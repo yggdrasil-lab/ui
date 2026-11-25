@@ -24,6 +24,7 @@ const activeBgVariants: Record<ChipVariant, string> = {
   purple: 'bg-purple-500/25 text-purple-300 font-semibold border border-purple-500',
   slate: 'bg-slate-200 text-slate-950 font-semibold border border-slate-300',
   rose: 'bg-rose-500/20 text-rose-400 font-semibold border border-rose-500',
+  brand: 'bg-accent text-accent-fg font-semibold border border-accent',
 };
 
 export const ChipSelector: React.FC<ChipSelectorProps> = ({

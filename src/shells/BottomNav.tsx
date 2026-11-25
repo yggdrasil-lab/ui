@@ -1,4 +1,5 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 import { THEME_BOTTOM_NAV_ACTIVE, type ThemeVariant } from '../theme/variants';
 
 export interface BottomNavTabItem {
@@ -34,7 +35,11 @@ export const BottomNav: React.FC<BottomNavProps> = ({
 
   return (
     <nav
-      className={`${desktopVisibility} fixed bottom-0 left-0 right-0 z-40 bg-card/95 backdrop-blur-md border-t border-border shadow-2xl pb-safe transform-gpu will-change-transform ${className}`}
+      className={twMerge(
+        desktopVisibility,
+        'fixed bottom-0 left-0 right-0 z-40 bg-[var(--ui-header-bg)] backdrop-blur-md border-t border-border shadow-2xl pb-safe transform-gpu will-change-transform',
+        className
+      )}
       style={{
         paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom, 0px))',
         paddingLeft: 'env(safe-area-inset-left, 0px)',
@@ -56,8 +61,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             <button
               key={tab.id}
               onClick={() => onChangeTab(tab.id)}
-              className={`bottom-nav-item py-2 px-1.5 sm:px-3 rounded-xl flex flex-col items-center space-y-1 transition-all ${
-                isActive ? activeStyle : 'text-slate-400 hover:text-slate-200'
+              className={`bottom-nav-item py-2 px-1.5 sm:px-3 rounded-ui-control flex flex-col items-center space-y-1 transition-all ${
+                isActive ? activeStyle : 'text-muted hover:text-foreground'
               }`}
               aria-label={tab.ariaLabel || tab.label}
             >
