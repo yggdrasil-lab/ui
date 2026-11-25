@@ -1,6 +1,6 @@
 {
   "name": "@yggdrasil-lab/ui",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "type": "module",
   "description": "Shared design system, React component library, and Storybook for Yggdrasil homelab PWAs",
   "main": "./dist/index.js",
