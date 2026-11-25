@@ -22,9 +22,10 @@ export function formatCurrency(
   } = options;
 
   const safeAmount = Number.isFinite(amount) ? amount : 0;
+  const resolvedMax = Math.max(minimumFractionDigits, maximumFractionDigits);
   const absFormatted = Math.abs(safeAmount).toLocaleString(locale, {
     minimumFractionDigits,
-    maximumFractionDigits,
+    maximumFractionDigits: resolvedMax,
   });
 
   if (safeAmount < 0) {

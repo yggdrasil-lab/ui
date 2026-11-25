@@ -6,6 +6,7 @@ export interface ModalProps {
     subtitle?: React.ReactNode;
     headerIcon?: React.ReactNode;
     disableClose?: boolean;
+    footer?: React.ReactNode;
     children: React.ReactNode;
     className?: string;
 }

@@ -107,3 +107,60 @@ const InteractiveMixedPreview: React.FC = () => {
 export const InteractiveMixed: Story = {
   render: () => <InteractiveMixedPreview />,
 };
+
+type FilterKey = 'all' | 'income' | 'spend';
+
+function buildThemedFilterItems(
+  activeFilter: FilterKey,
+  onSelect: (key: FilterKey) => void
+) {
+  return [
+    {
+      id: 'all',
+      label: 'All Cashflow',
+      value: '$8,620',
+      active: activeFilter === 'all',
+      variant: 'blue' as const,
+      onClick: () => onSelect('all'),
+    },
+    {
+      id: 'income',
+      label: 'Income',
+      value: '+$5,200',
+      valueClassName: 'text-emerald-400',
+      active: activeFilter === 'income',
+      variant: 'emerald' as const,
+      onClick: () => onSelect('income'),
+    },
+    {
+      id: 'spend',
+      label: 'Outflow',
+      value: '-$3,420',
+      valueClassName: 'text-rose-400',
+      active: activeFilter === 'spend',
+      variant: 'amber' as const,
+      onClick: () => onSelect('spend'),
+    },
+  ];
+}
+
+const InteractiveThemedFiltersPreview: React.FC = () => {
+  const [activeFilter, setActiveFilter] = useState<FilterKey>('income');
+
+  return (
+    <div className="w-full max-w-sm mx-auto p-4 bg-card rounded-2xl border border-border space-y-3">
+      <SummaryMetricGrid
+        columns={3}
+        variant="blue"
+        items={buildThemedFilterItems(activeFilter, setActiveFilter)}
+      />
+      <div className="text-[11px] text-slate-400 text-center">
+        Active filter: <span className="font-semibold text-slate-200">{activeFilter}</span>
+      </div>
+    </div>
+  );
+};
+
+export const InteractiveThemedFilters: Story = {
+  render: () => <InteractiveThemedFiltersPreview />,
+};

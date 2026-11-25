@@ -10,20 +10,16 @@ export interface ModalProps {
   subtitle?: React.ReactNode;
   headerIcon?: React.ReactNode;
   disableClose?: boolean;
+  footer?: React.ReactNode;
   children: React.ReactNode;
   className?: string;
 }
 
-export const Modal: React.FC<ModalProps> = ({
-  isOpen,
-  onClose,
-  title,
-  subtitle,
-  headerIcon,
-  disableClose = false,
-  children,
-  className = '',
-}) => {
+function useModalEffects(
+  isOpen: boolean,
+  disableClose: boolean,
+  onClose: () => void
+): void {
   const wasOpenRef = useRef<boolean>(false);
 
   useEffect(() => {
@@ -61,6 +57,59 @@ export const Modal: React.FC<ModalProps> = ({
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose, disableClose]);
+}
+
+interface ModalHeaderProps {
+  title?: string;
+  subtitle?: React.ReactNode;
+  headerIcon?: React.ReactNode;
+  disableClose: boolean;
+  onClose: () => void;
+}
+
+const ModalHeader: React.FC<ModalHeaderProps> = ({
+  title,
+  subtitle,
+  headerIcon,
+  disableClose,
+  onClose,
+}) => (
+  <div className="flex items-start justify-between px-5 py-4 border-b border-border/80">
+    {title ? (
+      <div className="space-y-0.5">
+        <div className="flex items-center gap-2">
+          {headerIcon && <span className="text-lg leading-none">{headerIcon}</span>}
+          <h2 className="text-base font-bold text-slate-100 m-0">{title}</h2>
+        </div>
+        {subtitle && <p className="text-xs text-sky-400 m-0">{subtitle}</p>}
+      </div>
+    ) : (
+      <div />
+    )}
+    <button
+      type="button"
+      onClick={onClose}
+      disabled={disableClose}
+      className="p-1.5 rounded-xl bg-background hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-colors disabled:opacity-50"
+      aria-label="Close dialog"
+    >
+      <X className="w-4 h-4" />
+    </button>
+  </div>
+);
+
+export const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  title,
+  subtitle,
+  headerIcon,
+  disableClose = false,
+  footer,
+  children,
+  className = '',
+}) => {
+  useModalEffects(isOpen, disableClose, onClose);
 
   if (!isOpen) return null;
 
@@ -76,34 +125,23 @@ export const Modal: React.FC<ModalProps> = ({
       <div
         className={`modal-card modal-content w-full max-w-md bg-card border border-border sm:rounded-3xl rounded-t-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] sm:max-h-[85vh] transition-all transform animate-slide-up pb-safe ${className}`}
       >
-        {/* Header */}
-        <div className="flex items-start justify-between px-5 py-4 border-b border-border/80">
-          {title ? (
-            <div className="space-y-0.5">
-              <div className="flex items-center gap-2">
-                {headerIcon && <span className="text-lg leading-none">{headerIcon}</span>}
-                <h2 className="text-base font-bold text-slate-100 m-0">{title}</h2>
-              </div>
-              {subtitle && <p className="text-xs text-sky-400 m-0">{subtitle}</p>}
-            </div>
-          ) : (
-            <div />
-          )}
-          <button
-            type="button"
-            onClick={onClose}
-            disabled={disableClose}
-            className="p-1.5 rounded-xl bg-background hover:bg-slate-800 text-slate-400 hover:text-slate-100 transition-colors disabled:opacity-50"
-            aria-label="Close dialog"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
+        <ModalHeader
+          title={title}
+          subtitle={subtitle}
+          headerIcon={headerIcon}
+          disableClose={disableClose}
+          onClose={onClose}
+        />
 
-        {/* Modal Body */}
         <div className="p-5 overflow-y-auto space-y-4 flex-1">
           {children}
         </div>
+
+        {footer && (
+          <div className="px-5 py-3.5 border-t border-border/80 bg-card/95 shrink-0">
+            {footer}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -6,6 +6,10 @@ import { TactileKeypad } from './TactileKeypad';
 const meta: Meta<typeof Modal> = {
   title: 'Primitives/Modal',
   component: Modal,
+  parameters: {
+    layout: 'padded',
+  },
+  tags: ['autodocs'],
 };
 
 export default meta;
@@ -17,8 +21,9 @@ export const InteractiveModal: Story = {
     const [value, setValue] = useState('42.00');
 
     return (
-      <div className="p-8 text-center">
+      <div className="w-full max-w-sm mx-auto p-6 text-center">
         <button
+          type="button"
           onClick={() => setOpen(true)}
           className="px-4 py-2 bg-amber-500 text-slate-950 font-bold rounded-xl shadow hover:bg-amber-400"
         >
@@ -32,6 +37,7 @@ export const InteractiveModal: Story = {
             </div>
             <TactileKeypad value={value} onChange={setValue} />
             <button
+              type="button"
               onClick={() => setOpen(false)}
               className="w-full py-3 bg-amber-500 hover:bg-amber-400 font-bold text-slate-950 rounded-xl"
             >
@@ -42,4 +48,62 @@ export const InteractiveModal: Story = {
       </div>
     );
   },
+};
+
+const StickyFooterActions: React.FC<{ onClose: () => void }> = ({ onClose }) => (
+  <div className="flex items-center justify-end gap-2">
+    <button
+      type="button"
+      onClick={onClose}
+      className="px-4 py-2 rounded-xl bg-background border border-border text-xs font-semibold text-slate-300 hover:text-slate-100"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      onClick={onClose}
+      className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-semibold text-white"
+    >
+      Save Changes
+    </button>
+  </div>
+);
+
+const StickyFooterPreview: React.FC = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="w-full max-w-sm mx-auto p-6 text-center">
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="px-4 py-2 bg-blue-600 text-white font-bold rounded-xl shadow hover:bg-blue-500"
+      >
+        Open Scrollable Sheet
+      </button>
+
+      <Modal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        title="Edit Workout Session"
+        subtitle="Sticky action bar remains pinned while content scrolls"
+        footer={<StickyFooterActions onClose={() => setOpen(false)} />}
+      >
+        <div className="space-y-3 text-xs text-slate-300">
+          {Array.from({ length: 12 }, (_, idx) => (
+            <div
+              key={idx}
+              className="p-3 rounded-xl bg-background border border-border/70"
+            >
+              Set {idx + 1}: Pendlay Row - 85 kg x 8 reps
+            </div>
+          ))}
+        </div>
+      </Modal>
+    </div>
+  );
+};
+
+export const WithStickyFooter: Story = {
+  render: () => <StickyFooterPreview />,
 };

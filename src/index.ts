@@ -15,6 +15,7 @@ export * from './primitives/Button';
 export * from './primitives/ChipSelector';
 export * from './primitives/EmptyState';
 export * from './primitives/FileDropzone';
+export * from './primitives/FormField';
 export * from './primitives/GlassCard';
 export * from './primitives/LoadingState';
 export * from './primitives/Modal';
@@ -26,10 +27,13 @@ export * from './primitives/RangeSlider';
 export * from './primitives/SearchInput';
 export * from './primitives/SectionHeader';
 export * from './primitives/SegmentedControl';
+export * from './primitives/SelectInput';
 export * from './primitives/SelectableCard';
 export * from './primitives/StatusBadge';
 export * from './primitives/TactileKeypad';
 export * from './primitives/TagPillList';
+export * from './primitives/TextArea';
+export * from './primitives/TextInput';
 
 // Patterns
 export * from './patterns/AiSynthesizerModal';
@@ -51,9 +55,11 @@ export * from './patterns/StatCard';
 export * from './patterns/SummaryMetricGrid';
 
 // Hooks & Utilities
+export * from './hooks/useAppResumeRefresh';
+export * from './hooks/useCopyFeedback';
+export * from './hooks/useDebouncedValue';
 export * from './hooks/usePwaUpdate';
 export * from './hooks/useRestTimer';
-export * from './hooks/useCopyFeedback';
 export * from './utils/telemetry';
 export * from './utils/format';
 export * from './utils/viewport';
