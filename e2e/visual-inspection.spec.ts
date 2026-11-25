@@ -121,9 +121,9 @@ for (const { name: platform, options } of PLATFORMS) {
 
       // 11. LoadMoreFooter
       await page.goto('/iframe.html?id=patterns-loadmorefooter--interactive-pagination&viewMode=story');
-      await expect(page.getByText('Showing 25 of 64')).toBeVisible();
+      await expect(page.getByText('Showing 25 of 64', { exact: true })).toBeVisible();
       await page.getByTestId('demo-load-more-btn').click();
-      await expect(page.getByText('Showing 50 of 64')).toBeVisible();
+      await expect(page.getByText('Showing 50 of 64', { exact: true })).toBeVisible();
       await page.screenshot({ path: `screenshots/${platform}/21-load-more-footer.png` });
 
       // 12. Controlled CollapsibleSection with headerActions
