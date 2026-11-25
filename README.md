@@ -1,37 +1,48 @@
-# Yggdrasil UI
+# Yggdrasil UI (`@yggdrasil-lab/ui`)
 
-Shared design system, React component library, and Storybook for Yggdrasil homelab PWAs across all life areas:
-- **Kratos** (Area 00-LifeOS / Health): Strength training and circadian fasting
-- **Midas** (Area 10-Wealth): Financial freedom runway clock and weekly burn tracker
-- Future PWAs across Mind, Career, and Home
+Shared React + TypeScript design system and hosted Storybook 8 workbench for Yggdrasil homelab PWAs:
+- **Kratos** (Health / strength training and circadian fasting)
+- **Midas** (Wealth / financial freedom runway and budgets)
+- **Iris** (`iris-web` / inbound email audit dashboard)
 
----
+## Layered Architecture (ADR 0001)
 
-## Architecture & Features
+Components follow a strict three-tier composition hierarchy with automated one-way import-boundary enforcement (`npm run check:layers`):
 
-- **Component Library:** Built with Vite and TypeScript, outputting tree-shakable ES modules with `.d.ts` type declarations.
-- **Storybook 8:** Hosted at `https://storybook.tienzo.net` with pre-configured mobile viewports:
-  - iPhone 14 (`390x844`)
-  - Pixel 7 (`412x915`)
-  - iPad Mini (`768x1024`)
-  - Desktop (`1280x800`)
-- **PWA Polish:**
-  - Viewport-locked bottom navigation (`fixed bottom-0 left-0 right-0 z-40`) immune to iOS Safari bounce.
-  - Safe area inset handling (`env(safe-area-inset-bottom)`).
-  - Tactile numeric keypad for rapid touch logging (expenses, workout weights/reps).
-  - Subtitle rotating refresh button (`RefreshCw`).
+- `src/primitives/` (20 components): Foundational visual building blocks with no pattern or shell dependencies.
+- `src/patterns/` (17 components): Reusable domain-agnostic compositions built from primitives.
+- `src/shells/` (3 components): Page and navigation chrome built on primitives and patterns.
+- Peer runtime folders: `theme/`, `hooks/`, `utils/`, `auth/`, `styles/`.
 
----
+All tiers re-export from the flat root barrel (`@yggdrasil-lab/ui`), paired with precompiled `@yggdrasil-lab/ui/style.css` and colocated Storybook stories organized under `Foundations / Primitives / Patterns / Shells`.
 
-## Development
+## Services
+
+| Service | Internal Port | Purpose |
+| :--- | :--- | :--- |
+| `ui-storybook` | `8080` (`aether-net`, behind Traefik + Authentik forward-auth) | Static Nginx (`nginx:1.27-alpine`) serving the Storybook 8 component workbench |
+
+## Development & Build
 
 ```bash
-# Run Storybook locally
+# Run local Storybook
 npm run dev
 
-# Build component library
+# Enforce one-way primitives -> patterns -> shells imports
+npm run check:layers
+
+# Layer check + typecheck + Vite library build into committed dist/
 npm run build:lib
 
-# Build Storybook static bundle
+# Layer check + static Storybook build
 npm run build:storybook
+
+# Full verification + library + Storybook build
+npm run build
 ```
+
+## Deployment & Canonical Documentation
+
+- **Deployment:** Automated via `.github/workflows/deploy.yml` on push to `main`, deploying Docker Swarm stack `ui` at `https://storybook.${DOMAIN_NAME}`.
+- **Vault Stack Reference:** `second-brain/Areas/90-Infrastructure/UI/UI Stack.md` (component catalog, env vars, Playwright visual gates, and pitfalls).
+- **Architecture Decision Record:** `second-brain/Areas/90-Infrastructure/UI/ADR/0001-layered-ui-composition-architecture.md`.
