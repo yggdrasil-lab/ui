@@ -11,6 +11,7 @@ export interface SelectableCardProps {
   badge?: React.ReactNode;
   icon?: React.ReactNode;
   isSelected?: boolean;
+  disabled?: boolean;
   onClick?: () => void;
   variant?: ThemeVariant;
   className?: string;
@@ -27,6 +28,7 @@ export const SelectableCard: React.FC<SelectableCardProps> = ({
   badge,
   icon,
   isSelected = false,
+  disabled = false,
   onClick,
   variant = 'amber',
   className = '',
@@ -44,9 +46,10 @@ export const SelectableCard: React.FC<SelectableCardProps> = ({
   return (
     <button
       type="button"
+      disabled={disabled}
       data-testid={testId}
       onClick={onClick}
-      className={`text-left p-3.5 rounded-xl border transition-all duration-150 w-full ${
+      className={`text-left p-3.5 rounded-xl border transition-all duration-150 w-full disabled:opacity-50 disabled:pointer-events-none ${
         isSelected
           ? selectedStyle
           : 'bg-background/60 border-border/60 hover:border-slate-700'

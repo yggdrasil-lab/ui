@@ -10,6 +10,7 @@ export interface SelectableCardProps {
     badge?: React.ReactNode;
     icon?: React.ReactNode;
     isSelected?: boolean;
+    disabled?: boolean;
     onClick?: () => void;
     variant?: ThemeVariant;
     className?: string;
