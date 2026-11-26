@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Activity, Clock, Dumbbell, Flame, Home, Sparkles, Wallet } from 'lucide-react';
+import { Activity, Calendar, Clock, Compass, Dumbbell, Flame, Home, MapPin, Sparkles, Wallet } from 'lucide-react';
 import { MetricHero } from '../patterns/MetricHero';
 import { Button } from '../primitives/Button';
 import { GlassCard } from '../primitives/GlassCard';
@@ -94,6 +94,29 @@ const THEME_PANEL_SPECS: readonly ThemePanelSpec[] = [
       { id: 'overview', label: 'Now', icon: <Clock className="w-4 h-4" /> },
       { id: 'budgets', label: 'Rhythm', icon: <Activity className="w-4 h-4" /> },
       { id: 'goals', label: 'Reflect', icon: <Sparkles className="w-4 h-4" /> },
+    ],
+  },
+  {
+    theme: 'odysseus',
+    brandInitial: 'O',
+    title: 'Odysseus Atlas',
+    heroTitle: 'Trip Readiness',
+    heroValue: '12',
+    heroUnit: 'Days',
+    badgeLabel: 'Route Locked',
+    progressLabel: 'Itinerary Confirmed',
+    progressValue: 86,
+    primaryAction: 'Add Stop',
+    secondaryAction: 'Route Map',
+    segments: [
+      { id: 'overview', label: 'Route' },
+      { id: 'budgets', label: 'Stays' },
+      { id: 'goals', label: 'Budget' },
+    ],
+    navTabs: [
+      { id: 'overview', label: 'Atlas', icon: <Compass className="w-4 h-4" /> },
+      { id: 'budgets', label: 'Stops', icon: <MapPin className="w-4 h-4" /> },
+      { id: 'goals', label: 'Days', icon: <Calendar className="w-4 h-4" /> },
     ],
   },
 ];
@@ -190,7 +213,7 @@ type Story = StoryObj;
 export const AllAppThemes: Story = {
   render: () => (
     <div className="min-h-screen p-4 sm:p-6 bg-black/50">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-6">
         {THEME_PANEL_SPECS.map((spec) => (
           <ThemePanel key={spec.theme} spec={spec} />
         ))}

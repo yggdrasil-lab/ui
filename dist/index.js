@@ -8,7 +8,8 @@ const Na = [
   "default",
   "midas",
   "kratos",
-  "kairos"
+  "kairos",
+  "odysseus"
 ], ka = {
   default: {
     id: "default",
@@ -37,6 +38,13 @@ const Na = [
     subtitle: "Twilight Mist & Candle",
     swatchHex: "#c4b5fd",
     secondaryHex: "#e5c185"
+  },
+  odysseus: {
+    id: "odysseus",
+    label: "Odysseus",
+    subtitle: "Aegean Deep & Compass Teal",
+    swatchHex: "#38bdf8",
+    secondaryHex: "#f59e0b"
   }
 }, V = {
   amber: "text-amber-400",
