@@ -1,4 +1,4 @@
-export type AppTheme = 'default' | 'midas' | 'kratos' | 'kairos';
+export type AppTheme = 'default' | 'midas' | 'kratos' | 'kairos' | 'odysseus';
 export interface AppThemeMeta {
     id: AppTheme;
     label: string;

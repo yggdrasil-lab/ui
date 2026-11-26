@@ -1,4 +1,4 @@
-export type AppTheme = 'default' | 'midas' | 'kratos' | 'kairos';
+export type AppTheme = 'default' | 'midas' | 'kratos' | 'kairos' | 'odysseus';
 
 export interface AppThemeMeta {
   id: AppTheme;
@@ -13,6 +13,7 @@ export const APP_THEMES: readonly AppTheme[] = [
   'midas',
   'kratos',
   'kairos',
+  'odysseus',
 ] as const;
 
 export const APP_THEME_META: Record<AppTheme, AppThemeMeta> = {
@@ -43,5 +44,12 @@ export const APP_THEME_META: Record<AppTheme, AppThemeMeta> = {
     subtitle: 'Twilight Mist & Candle',
     swatchHex: '#c4b5fd',
     secondaryHex: '#e5c185',
+  },
+  odysseus: {
+    id: 'odysseus',
+    label: 'Odysseus',
+    subtitle: 'Aegean Deep & Compass Teal',
+    swatchHex: '#38bdf8',
+    secondaryHex: '#f59e0b',
   },
 };

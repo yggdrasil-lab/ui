@@ -151,20 +151,24 @@ for (const { name: platform, options } of PLATFORMS) {
       const midasPanel = page.locator('[data-theme="midas"]');
       const kratosPanel = page.locator('[data-theme="kratos"]');
       const kairosPanel = page.locator('[data-theme="kairos"]');
+      const odysseusPanel = page.locator('[data-theme="odysseus"]');
       await expect(midasPanel).toBeVisible();
       await expect(kratosPanel).toBeVisible();
       await expect(kairosPanel).toBeVisible();
+      await expect(odysseusPanel).toBeVisible();
 
       const midasTokens = await readThemeTokens(midasPanel);
       const kratosTokens = await readThemeTokens(kratosPanel);
       const kairosTokens = await readThemeTokens(kairosPanel);
+      const odysseusTokens = await readThemeTokens(odysseusPanel);
 
       expect(midasTokens).toEqual({ bg: '11 10 8', accent: '212 160 56', radiusCard: '10px' });
       expect(kratosTokens).toEqual({ bg: '9 9 11', accent: '244 63 94', radiusCard: '4px' });
       expect(kairosTokens).toEqual({ bg: '17 15 22', accent: '196 181 253', radiusCard: '22px' });
-      expect(new Set([midasTokens.bg, kratosTokens.bg, kairosTokens.bg]).size).toBe(3);
-      expect(new Set([midasTokens.accent, kratosTokens.accent, kairosTokens.accent]).size).toBe(3);
-      expect(new Set([midasTokens.radiusCard, kratosTokens.radiusCard, kairosTokens.radiusCard]).size).toBe(3);
+      expect(odysseusTokens).toEqual({ bg: '10 17 26', accent: '56 189 248', radiusCard: '14px' });
+      expect(new Set([midasTokens.bg, kratosTokens.bg, kairosTokens.bg, odysseusTokens.bg]).size).toBe(4);
+      expect(new Set([midasTokens.accent, kratosTokens.accent, kairosTokens.accent, odysseusTokens.accent]).size).toBe(4);
+      expect(new Set([midasTokens.radiusCard, kratosTokens.radiusCard, kairosTokens.radiusCard, odysseusTokens.radiusCard]).size).toBe(4);
 
       await page.screenshot({ path: `screenshots/${platform}/23-theme-showcase.png`, fullPage: true });
     });

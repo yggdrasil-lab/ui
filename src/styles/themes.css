@@ -91,6 +91,29 @@
   --ui-shadow-card: 0 14px 32px -16px rgba(0, 0, 0, 0.60);
 }
 
+[data-theme="odysseus"] {
+  --ui-bg: 10 17 26;
+  --ui-card: 17 28 41;
+  --ui-card-muted: 24 39 58;
+  --ui-border: 34 54 78;
+  --ui-text: 240 247 255;
+  --ui-text-muted: 148 175 204;
+  --ui-accent: 56 189 248;
+  --ui-accent-fg: 10 17 26;
+  --ui-secondary: 245 158 11;
+  --ui-header-bg: rgba(13, 22, 34, 0.92);
+  --ui-bg-image: radial-gradient(circle at 82% 8%, rgba(56, 189, 248, 0.14), transparent 46%), radial-gradient(circle at 12% 92%, rgba(245, 158, 11, 0.08), transparent 42%);
+  --ui-bg-size: 100% 100%;
+  --ui-radius-card: 14px;
+  --ui-radius-control: 10px;
+  --ui-radius-pill: 9999px;
+  --ui-font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ui-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ui-display-tracking: -0.015em;
+  --ui-eyebrow-tracking: 0.11em;
+  --ui-shadow-card: 0 12px 30px -14px rgba(2, 6, 14, 0.72);
+}
+
 [data-theme] {
   background-color: rgb(var(--ui-bg));
   background-image: var(--ui-bg-image);
