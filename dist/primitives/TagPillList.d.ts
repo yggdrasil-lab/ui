@@ -1,5 +1,5 @@
 import { default as React } from 'react';
-export interface TagPillListProps {
+export interface TagPillListProps extends React.HTMLAttributes<HTMLDivElement> {
     tags: string[];
     onAddTag?: (cleanedTag: string) => void | Promise<void>;
     onRemoveTag?: (tag: string) => void | Promise<void>;

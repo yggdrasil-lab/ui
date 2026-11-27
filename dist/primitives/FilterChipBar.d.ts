@@ -7,7 +7,7 @@ export interface FilterChipOption {
     highlight?: boolean;
     testId?: string;
 }
-export interface FilterChipBarProps {
+export interface FilterChipBarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect' | 'prefix'> {
     options: FilterChipOption[];
     selectedId: string;
     onSelect: (id: string) => void;

@@ -5,7 +5,7 @@ export type ChipOptionItem = string | {
     label: string;
 };
 export type ChipVariant = ThemeVariant | 'rose';
-export interface ChipSelectorProps {
+export interface ChipSelectorProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
     options: ChipOptionItem[];
     selected?: string;
     selectedValues?: string[];

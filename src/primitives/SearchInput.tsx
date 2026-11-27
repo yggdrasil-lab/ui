@@ -1,8 +1,10 @@
 import React from 'react';
 import { Search, X } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
 import { THEME_FOCUS_BORDER, type ThemeVariant } from '../theme/variants';
 
-export interface SearchInputProps {
+export interface SearchInputProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
@@ -20,11 +22,12 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   rightSlot,
   className = '',
   'data-testid': testId,
+  ...rest
 }) => {
   const focusBorder = THEME_FOCUS_BORDER[variant] || THEME_FOCUS_BORDER.amber;
 
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={twMerge('flex items-center gap-2', className)} {...rest}>
       <div className="relative flex-1 min-w-0">
         <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
         <input

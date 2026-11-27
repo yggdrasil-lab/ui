@@ -1,8 +1,10 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 export type AlertBannerVariant = 'info' | 'success' | 'warning' | 'error';
 
-export interface AlertBannerProps {
+export interface AlertBannerProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   variant?: AlertBannerVariant;
   title?: React.ReactNode;
   children?: React.ReactNode;
@@ -34,6 +36,7 @@ export const AlertBanner: React.FC<AlertBannerProps> = ({
   action,
   role = 'alert',
   className = '',
+  ...rest
 }) => {
   const containerStyle = variantClasses[variant] || variantClasses.info;
   const titleStyle = titleColorClasses[variant] || titleColorClasses.info;
@@ -41,7 +44,12 @@ export const AlertBanner: React.FC<AlertBannerProps> = ({
   return (
     <div
       role={role}
-      className={`rounded-xl border px-3.5 py-2.5 text-xs flex items-start justify-between gap-3 ${containerStyle} ${className}`}
+      className={twMerge(
+        'rounded-xl border px-3.5 py-2.5 text-xs flex items-start justify-between gap-3',
+        containerStyle,
+        className
+      )}
+      {...rest}
     >
       <div className="flex items-start gap-2.5 flex-1 min-w-0">
         {icon && (

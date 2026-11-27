@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { FileText, X } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
 import {
   THEME_DROPZONE_ACTIVE,
   THEME_TEXT_COLORS,
   type ThemeVariant,
 } from '../theme/variants';
 
-export interface FileDropzoneProps {
+export interface FileDropzoneProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   file: File | null;
   onFileChange: (file: File | null) => void;
   acceptedFormats?: string;
@@ -17,6 +19,53 @@ export interface FileDropzoneProps {
   children?: React.ReactNode;
 }
 
+interface DropzoneContentProps {
+  file: File | null;
+  title: string;
+  description: string;
+  highlightClass: string;
+  onClearFile: () => void;
+}
+
+const DropzoneContent: React.FC<DropzoneContentProps> = ({
+  file,
+  title,
+  description,
+  highlightClass,
+  onClearFile,
+}) => (
+  <>
+    <FileText className="w-8 h-8 text-slate-400 mx-auto" />
+    <div className="text-xs text-slate-300 font-medium">
+      {file ? (
+        <div className="inline-flex items-center space-x-2 bg-card px-3 py-1 rounded-lg border border-border">
+          <span className={`${highlightClass} font-semibold truncate max-w-[240px]`}>
+            {file.name}
+          </span>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onClearFile();
+            }}
+            className="text-slate-400 hover:text-slate-200 p-0.5 rounded"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      ) : (
+        <>
+          <span>{title.split('browse')[0]}</span>
+          <span className={`${highlightClass} underline`}>browse</span>
+          <span>{title.split('browse')[1] || ''}</span>
+        </>
+      )}
+    </div>
+    <p className="text-[10px] text-slate-500">{description}</p>
+  </>
+);
+
 export const FileDropzone: React.FC<FileDropzoneProps> = ({
   file,
   onFileChange,
@@ -26,6 +75,7 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
   variant = 'amber',
   className = '',
   children,
+  ...rest
 }) => {
   const [dragActive, setDragActive] = useState(false);
   const inputId = React.useId();
@@ -60,15 +110,18 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
 
   return (
     <div
+      {...rest}
       onDragEnter={handleDrag}
       onDragOver={handleDrag}
       onDragLeave={handleDrag}
       onDrop={handleDrop}
-      className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all ${
+      className={twMerge(
+        'border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all',
         dragActive
           ? activeBorder
-          : 'border-border hover:border-slate-600 bg-background/50'
-      } ${className}`}
+          : 'border-border hover:border-slate-600 bg-background/50',
+        className
+      )}
     >
       <input
         type="file"
@@ -78,34 +131,13 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
         className="hidden"
       />
       <label htmlFor={inputId} className="cursor-pointer space-y-2 block">
-        <FileText className="w-8 h-8 text-slate-400 mx-auto" />
-        <div className="text-xs text-slate-300 font-medium">
-          {file ? (
-            <div className="inline-flex items-center space-x-2 bg-card px-3 py-1 rounded-lg border border-border">
-              <span className={`${highlightClass} font-semibold truncate max-w-[240px]`}>
-                {file.name}
-              </span>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  onFileChange(null);
-                }}
-                className="text-slate-400 hover:text-slate-200 p-0.5 rounded"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          ) : (
-            <>
-              <span>{title.split('browse')[0]}</span>
-              <span className={`${highlightClass} underline`}>browse</span>
-              <span>{title.split('browse')[1] || ''}</span>
-            </>
-          )}
-        </div>
-        <p className="text-[10px] text-slate-500">{description}</p>
+        <DropzoneContent
+          file={file}
+          title={title}
+          description={description}
+          highlightClass={highlightClass}
+          onClearFile={() => onFileChange(null)}
+        />
       </label>
 
       {children && <div className="mt-4">{children}</div>}

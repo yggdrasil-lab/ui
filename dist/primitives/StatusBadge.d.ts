@@ -1,7 +1,7 @@
 import { default as React } from 'react';
 export type StatusBadgeVariant = 'idle' | 'busy' | 'success' | 'error' | 'warning' | 'info' | 'purple' | 'orange';
 export type StatusBadgeSize = 'xs' | 'sm';
-export interface StatusBadgeProps {
+export interface StatusBadgeProps extends React.HTMLAttributes<HTMLDivElement> {
     label: string;
     variant?: StatusBadgeVariant;
     size?: StatusBadgeSize;

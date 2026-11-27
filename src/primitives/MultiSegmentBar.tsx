@@ -1,4 +1,5 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 export interface MultiSegmentItem {
   id: string;
@@ -33,7 +34,7 @@ export function normalizeSegments(segments: MultiSegmentItem[]): NormalizedSegme
   }));
 }
 
-export interface MultiSegmentBarProps {
+export interface MultiSegmentBarProps extends React.HTMLAttributes<HTMLDivElement> {
   segments: MultiSegmentItem[];
   showLegend?: boolean;
   heightClass?: string;
@@ -45,12 +46,13 @@ export const MultiSegmentBar: React.FC<MultiSegmentBarProps> = ({
   showLegend = true,
   heightClass = 'h-2.5',
   className = '',
+  ...rest
 }) => {
   const normalized = normalizeSegments(segments);
   if (normalized.length === 0) return null;
 
   return (
-    <div className={`space-y-1.5 ${className}`}>
+    <div className={twMerge('space-y-1.5', className)} {...rest}>
       <div
         className={`w-full ${heightClass} rounded-full overflow-hidden flex bg-slate-800/80 border border-slate-700/50 shadow-inner`}
       >

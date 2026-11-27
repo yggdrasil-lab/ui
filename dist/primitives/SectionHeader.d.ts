@@ -1,6 +1,6 @@
 import { default as React } from 'react';
 import { AccentVariant } from '../theme/variants';
-export interface SectionHeaderProps {
+export interface SectionHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
     title: string;
     subtitle?: string;
     icon?: React.ReactNode;

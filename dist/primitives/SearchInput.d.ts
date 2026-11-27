@@ -1,6 +1,6 @@
 import { default as React } from 'react';
 import { ThemeVariant } from '../theme/variants';
-export interface SearchInputProps {
+export interface SearchInputProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
     value: string;
     onChange: (value: string) => void;
     placeholder?: string;

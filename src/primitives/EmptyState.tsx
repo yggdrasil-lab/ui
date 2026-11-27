@@ -1,6 +1,8 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
-export interface EmptyStateProps {
+export interface EmptyStateProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   title: React.ReactNode;
   description?: React.ReactNode;
   icon?: React.ReactNode;
@@ -21,12 +23,18 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   action,
   variant = 'dashed',
   className = '',
+  ...rest
 }) => {
   const containerClass = variantClasses[variant] || variantClasses.dashed;
 
   return (
     <div
-      className={`rounded-2xl p-6 text-center flex flex-col items-center justify-center space-y-2 ${containerClass} ${className}`}
+      className={twMerge(
+        'rounded-2xl p-6 text-center flex flex-col items-center justify-center space-y-2',
+        containerClass,
+        className
+      )}
+      {...rest}
     >
       {icon && (
         <div className="text-slate-400 mb-1 flex items-center justify-center">

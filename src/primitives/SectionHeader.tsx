@@ -1,7 +1,9 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 import type { AccentVariant } from '../theme/variants';
 
-export interface SectionHeaderProps {
+export interface SectionHeaderProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   title: string;
   subtitle?: string;
   icon?: React.ReactNode;
@@ -39,6 +41,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   uppercaseTitle = false,
   size = 'sm',
   className = '',
+  ...rest
 }) => {
   const iconBadgeClass = iconBadgeVariants[variant] || iconBadgeVariants.amber;
   const HeadingTag = titleAs;
@@ -49,7 +52,10 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   const iconWrapClass = size === 'md' ? 'p-2.5 rounded-xl border' : 'p-1.5 rounded-lg border';
 
   return (
-    <div className={`flex flex-wrap items-center justify-between gap-3 ${className}`}>
+    <div
+      className={twMerge('flex flex-wrap items-center justify-between gap-3', className)}
+      {...rest}
+    >
       <div className="flex items-center space-x-2.5 min-w-[200px] flex-1">
         {icon && (
           <div className={`${iconWrapClass} shrink-0 ${iconBadgeClass}`}>

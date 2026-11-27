@@ -1,5 +1,5 @@
 import { default as React } from 'react';
-export interface EmptyStateProps {
+export interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
     title: React.ReactNode;
     description?: React.ReactNode;
     icon?: React.ReactNode;

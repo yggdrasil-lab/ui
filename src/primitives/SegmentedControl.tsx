@@ -1,4 +1,5 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 import { THEME_SEGMENT_ACTIVE, type ThemeVariant } from '../theme/variants';
 
 export interface SegmentedControlOption<T extends string = string> {
@@ -8,7 +9,8 @@ export interface SegmentedControlOption<T extends string = string> {
   badge?: string | number;
 }
 
-export interface SegmentedControlProps<T extends string = string> {
+export interface SegmentedControlProps<T extends string = string>
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   options: SegmentedControlOption<T>[];
   value: T;
   onChange: (value: T) => void;
@@ -34,6 +36,8 @@ export function SegmentedControl<T extends string = string>({
   fullWidth = false,
   className = '',
   idPrefix = 'segmented',
+  style,
+  ...rest
 }: SegmentedControlProps<T>) {
   const activeClass = THEME_SEGMENT_ACTIVE[variant] || THEME_SEGMENT_ACTIVE.amber;
   const sizeClass = sizeStyles[size] || sizeStyles.xs;
@@ -41,10 +45,17 @@ export function SegmentedControl<T extends string = string>({
   return (
     <div
       role="tablist"
-      className={`inline-flex items-center bg-card/60 p-0.5 rounded-ui-control border border-border ${
-        fullWidth ? 'w-full grid' : ''
-      } ${className}`}
-      style={fullWidth ? { gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` } : undefined}
+      className={twMerge(
+        'inline-flex items-center bg-card/60 p-0.5 rounded-ui-control border border-border',
+        fullWidth && 'w-full grid',
+        className
+      )}
+      style={
+        fullWidth
+          ? { ...style, gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` }
+          : style
+      }
+      {...rest}
     >
       {options.map((option) => {
         const isSelected = value === option.id;

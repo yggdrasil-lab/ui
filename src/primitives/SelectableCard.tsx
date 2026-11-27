@@ -1,7 +1,9 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 import { THEME_RING_SELECTED, type ThemeVariant } from '../theme/variants';
 
-export interface SelectableCardProps {
+export interface SelectableCardProps
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'title' | 'value'> {
   title: string;
   subtitle?: string;
   value?: string | number;
@@ -32,7 +34,8 @@ export const SelectableCard: React.FC<SelectableCardProps> = ({
   onClick,
   variant = 'amber',
   className = '',
-  'data-testid': testId,
+  type = 'button',
+  ...rest
 }) => {
   const selectedStyle = THEME_RING_SELECTED[variant] || THEME_RING_SELECTED.amber;
 
@@ -45,15 +48,17 @@ export const SelectableCard: React.FC<SelectableCardProps> = ({
 
   return (
     <button
-      type="button"
+      type={type}
       disabled={disabled}
-      data-testid={testId}
       onClick={onClick}
-      className={`text-left p-3.5 rounded-xl border transition-all duration-150 w-full disabled:opacity-50 disabled:pointer-events-none ${
+      className={twMerge(
+        'text-left p-3.5 rounded-xl border transition-all duration-150 w-full disabled:opacity-50 disabled:pointer-events-none',
         isSelected
           ? selectedStyle
-          : 'bg-background/60 border-border/60 hover:border-slate-700'
-      } ${className}`}
+          : 'bg-background/60 border-border/60 hover:border-slate-700',
+        className
+      )}
+      {...rest}
     >
       <div className="flex items-center justify-between gap-2 mb-1.5">
         <span className="text-xs font-semibold text-slate-200 truncate flex items-center gap-1.5">
