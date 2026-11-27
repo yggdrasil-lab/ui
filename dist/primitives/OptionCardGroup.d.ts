@@ -7,11 +7,11 @@ export interface OptionCardItem<T extends string = string> {
     icon?: React.ReactNode;
     accent?: OptionCardAccent;
 }
-export interface OptionCardGroupProps<T extends string = string> {
+export interface OptionCardGroupProps<T extends string = string> extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
     label?: string;
     options: OptionCardItem<T>[];
     value: T;
     onChange: (value: T) => void;
     className?: string;
 }
-export declare function OptionCardGroup<T extends string = string>({ label, options, value, onChange, className, }: OptionCardGroupProps<T>): React.JSX.Element;
+export declare function OptionCardGroup<T extends string = string>({ label, options, value, onChange, className, ...rest }: OptionCardGroupProps<T>): React.JSX.Element;

@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
 import { resetMobileViewportZoom } from '../utils/viewport';
 
-export interface ModalProps {
+export interface ModalProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
@@ -108,6 +110,7 @@ export const Modal: React.FC<ModalProps> = ({
   footer,
   children,
   className = '',
+  ...rest
 }) => {
   useModalEffects(isOpen, disableClose, onClose);
 
@@ -123,7 +126,11 @@ export const Modal: React.FC<ModalProps> = ({
       }}
     >
       <div
-        className={`modal-card modal-content w-full max-w-md bg-card border border-border rounded-t-ui-card sm:rounded-ui-card shadow-2xl overflow-hidden flex flex-col max-h-[92vh] sm:max-h-[85vh] transition-all transform animate-slide-up pb-safe ${className}`}
+        className={twMerge(
+          'modal-card modal-content w-full max-w-md bg-card border border-border rounded-t-ui-card sm:rounded-ui-card shadow-2xl overflow-hidden flex flex-col max-h-[92vh] sm:max-h-[85vh] transition-all transform animate-slide-up pb-safe',
+          className
+        )}
+        {...rest}
       >
         <ModalHeader
           title={title}

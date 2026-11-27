@@ -10,7 +10,8 @@ export interface FilterChipOption {
   testId?: string;
 }
 
-export interface FilterChipBarProps {
+export interface FilterChipBarProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect' | 'prefix'> {
   options: FilterChipOption[];
   selectedId: string;
   onSelect: (id: string) => void;
@@ -90,7 +91,7 @@ export const FilterChipBar: React.FC<FilterChipBarProps> = ({
   scrollable = false,
   prefix,
   className = '',
-  'data-testid': testId,
+  ...rest
 }) => {
   const layoutClass = scrollable
     ? 'flex items-center gap-1.5 overflow-x-auto py-1 scrollbar-none'
@@ -106,7 +107,7 @@ export const FilterChipBar: React.FC<FilterChipBarProps> = ({
   };
 
   return (
-    <div data-testid={testId} className={twMerge(layoutClass, className)}>
+    <div className={twMerge(layoutClass, className)} {...rest}>
       {Boolean(prefix) && <span className="shrink-0">{prefix}</span>}
       {options.map((opt) => {
         const isSelected = selectedId === opt.id;

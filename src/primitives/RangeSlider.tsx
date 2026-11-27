@@ -1,8 +1,10 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 export type RangeSliderVariant = 'amber' | 'sky' | 'blue' | 'emerald' | 'purple';
 
-export interface RangeSliderProps {
+export interface RangeSliderProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   label: string;
   valueDisplay: React.ReactNode;
   valueClassName?: string;
@@ -40,11 +42,12 @@ export const RangeSlider: React.FC<RangeSliderProps> = ({
   maxLabel,
   variant = 'amber',
   className = '',
+  ...rest
 }) => {
   const accentClass = accentClasses[variant] || accentClasses.amber;
 
   return (
-    <div className={`space-y-1 ${className}`}>
+    <div className={twMerge('space-y-1', className)} {...rest}>
       <div className="flex justify-between text-xs">
         <span className="text-slate-400">{label}</span>
         <span className={`font-semibold ${valueClassName}`}>

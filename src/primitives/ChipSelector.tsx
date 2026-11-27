@@ -1,10 +1,12 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 import type { ThemeVariant } from '../theme/variants';
 
 export type ChipOptionItem = string | { value: string; label: string };
 export type ChipVariant = ThemeVariant | 'rose';
 
-export interface ChipSelectorProps {
+export interface ChipSelectorProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   options: ChipOptionItem[];
   selected?: string;
   selectedValues?: string[];
@@ -38,6 +40,7 @@ export const ChipSelector: React.FC<ChipSelectorProps> = ({
   variant = 'amber',
   size = 'sm',
   className = '',
+  ...rest
 }) => {
   const activeClass = activeBgVariants[variant] || activeBgVariants.amber;
   const paddingClass = size === 'sm' ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm';
@@ -59,7 +62,10 @@ export const ChipSelector: React.FC<ChipSelectorProps> = ({
   };
 
   return (
-    <div className={`flex ${equalWidth ? 'w-full gap-2' : 'flex-wrap gap-1.5'} ${className}`}>
+    <div
+      className={twMerge('flex', equalWidth ? 'w-full gap-2' : 'flex-wrap gap-1.5', className)}
+      {...rest}
+    >
       {options.map((opt) => {
         const val = typeof opt === 'string' ? opt : opt.value;
         const label = typeof opt === 'string' ? opt : opt.label;

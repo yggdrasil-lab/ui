@@ -16,7 +16,7 @@ export type ProgressBarSize = 'sm' | 'md';
 
 export type ProgressBarTransition = 'default' | 'linear';
 
-export interface ProgressBarProps {
+export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
   value: number;
   max?: number;
   tone?: ProgressBarTone;
@@ -51,8 +51,20 @@ const TRANSITION_CLASSES: Record<ProgressBarTransition, string> = {
 };
 
 export const ProgressBar: React.FC<ProgressBarProps> = (props) => {
-  const { value, max = 100, tone = 'gradient', variant = 'blue', size = 'md' } = props;
-  const { transition = 'default', round = true, label, trackClassName, fillClassName, className } = props;
+  const {
+    value,
+    max = 100,
+    tone = 'gradient',
+    variant = 'blue',
+    size = 'md',
+    transition = 'default',
+    round = true,
+    label,
+    trackClassName,
+    fillClassName,
+    className,
+    ...rest
+  } = props;
   const pct = clampProgressPercent(value, max, round);
   const fillToneClass = resolveFillToneClass(tone, variant);
 
@@ -69,6 +81,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = (props) => {
         trackClassName,
         className
       )}
+      {...rest}
     >
       <div
         className={twMerge('h-full rounded-ui-pill transition-all', TRANSITION_CLASSES[transition], fillToneClass, fillClassName)}

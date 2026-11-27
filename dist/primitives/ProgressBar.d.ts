@@ -3,7 +3,7 @@ import { ThemeVariant } from '../theme/variants';
 export type ProgressBarTone = 'emerald' | 'amber' | 'rose' | 'blue' | 'purple' | 'slate' | 'brand' | 'gradient';
 export type ProgressBarSize = 'sm' | 'md';
 export type ProgressBarTransition = 'default' | 'linear';
-export interface ProgressBarProps {
+export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
     value: number;
     max?: number;
     tone?: ProgressBarTone;

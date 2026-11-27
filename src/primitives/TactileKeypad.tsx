@@ -1,8 +1,10 @@
 import React from 'react';
 import { Delete } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
 import { THEME_ACTION_TEXT, type ThemeVariant } from '../theme/variants';
 
-export interface TactileKeypadProps {
+export interface TactileKeypadProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   value: string;
   onChange: (newValue: string) => void;
   onClear?: () => void;
@@ -11,6 +13,23 @@ export interface TactileKeypadProps {
   actionColor?: string;
   allowDecimals?: boolean;
   className?: string;
+}
+
+function applyKeypadDigit(
+  value: string,
+  digit: string,
+  allowDecimals: boolean,
+  maxDecimalPlaces: number
+): string | null {
+  if (digit === '.') {
+    if (!allowDecimals || value.includes('.')) return null;
+    return value === '' ? '0.' : value + '.';
+  }
+  if (value.includes('.')) {
+    const parts = value.split('.');
+    if (parts[1] && parts[1].length >= maxDecimalPlaces) return null;
+  }
+  return value === '0' ? digit : value + digit;
 }
 
 export const TactileKeypad: React.FC<TactileKeypadProps> = ({
@@ -22,32 +41,17 @@ export const TactileKeypad: React.FC<TactileKeypadProps> = ({
   actionColor,
   allowDecimals = true,
   className = '',
+  ...rest
 }) => {
   const handleDigit = (digit: string) => {
-    if (digit === '.') {
-      if (!allowDecimals || value.includes('.')) return;
-      onChange(value === '' ? '0.' : value + '.');
-      return;
-    }
-
-    if (value.includes('.')) {
-      const parts = value.split('.');
-      if (parts[1] && parts[1].length >= maxDecimalPlaces) return;
-    }
-
-    if (value === '0') {
-      onChange(digit);
-    } else {
-      onChange(value + digit);
+    const next = applyKeypadDigit(value, digit, allowDecimals, maxDecimalPlaces);
+    if (next !== null) {
+      onChange(next);
     }
   };
 
   const handleBackspace = () => {
-    if (value.length <= 1) {
-      onChange('');
-    } else {
-      onChange(value.slice(0, -1));
-    }
+    onChange(value.length <= 1 ? '' : value.slice(0, -1));
   };
 
   const handleFullClear = () => {
@@ -62,23 +66,22 @@ export const TactileKeypad: React.FC<TactileKeypadProps> = ({
   const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', allowDecimals ? '.' : '', '0'];
 
   return (
-    <div className={`grid grid-cols-3 gap-2 w-full max-w-sm mx-auto ${className}`}>
-      {keys.map((k, idx) => {
-        if (!k) {
-          return (
-            <button
-              key={`empty-${idx}`}
-              type="button"
-              onClick={handleFullClear}
-              className={`h-14 sm:h-16 rounded-2xl bg-card hover:bg-slate-800 active:scale-95 border border-border/80 text-xs font-bold ${actionStyle} shadow-sm transition-all flex items-center justify-center select-none uppercase tracking-wider`}
-              title="Clear all"
-            >
-              C
-            </button>
-          );
-        }
-
-        return (
+    <div
+      className={twMerge('grid grid-cols-3 gap-2 w-full max-w-sm mx-auto', className)}
+      {...rest}
+    >
+      {keys.map((k, idx) =>
+        !k ? (
+          <button
+            key={`empty-${idx}`}
+            type="button"
+            onClick={handleFullClear}
+            className={`h-14 sm:h-16 rounded-2xl bg-card hover:bg-slate-800 active:scale-95 border border-border/80 text-xs font-bold ${actionStyle} shadow-sm transition-all flex items-center justify-center select-none uppercase tracking-wider`}
+            title="Clear all"
+          >
+            C
+          </button>
+        ) : (
           <button
             key={k}
             type="button"
@@ -87,8 +90,8 @@ export const TactileKeypad: React.FC<TactileKeypadProps> = ({
           >
             {k}
           </button>
-        );
-      })}
+        )
+      )}
 
       {/* Clear / Backspace key */}
       <button

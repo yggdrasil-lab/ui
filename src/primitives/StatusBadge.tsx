@@ -13,7 +13,7 @@ export type StatusBadgeVariant =
 
 export type StatusBadgeSize = 'xs' | 'sm';
 
-export interface StatusBadgeProps {
+export interface StatusBadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string;
   variant?: StatusBadgeVariant;
   size?: StatusBadgeSize;
@@ -71,6 +71,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   showDot = true,
   isPulsing = false,
   className = '',
+  ...rest
 }) => {
   const style = statusBadgeStyles[variant] || statusBadgeStyles.idle;
   const sizeClass = statusBadgeSizes[size] || statusBadgeSizes.sm;
@@ -83,6 +84,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
         style.bg,
         className
       )}
+      {...rest}
     >
       {icon ? (
         <span className="mr-1.5 shrink-0 flex items-center">{icon}</span>

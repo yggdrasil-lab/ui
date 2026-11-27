@@ -1,6 +1,6 @@
 import { default as React } from 'react';
 import { ThemeVariant } from '../theme/variants';
-export interface SelectableCardProps {
+export interface SelectableCardProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'title' | 'value'> {
     title: string;
     subtitle?: string;
     value?: string | number;

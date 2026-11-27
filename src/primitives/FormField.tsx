@@ -1,7 +1,7 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
-export interface FormFieldProps {
+export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string;
   htmlFor?: string;
   hint?: React.ReactNode;
@@ -25,8 +25,9 @@ export const FormField: React.FC<FormFieldProps> = ({
   rightSlot,
   children,
   className = '',
+  ...rest
 }) => (
-  <div className={twMerge('space-y-1.5', className)}>
+  <div className={twMerge('space-y-1.5', className)} {...rest}>
     <div className="flex items-center justify-between gap-2">
       <label
         htmlFor={htmlFor}

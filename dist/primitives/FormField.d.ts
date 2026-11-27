@@ -1,5 +1,5 @@
 import { default as React } from 'react';
-export interface FormFieldProps {
+export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement> {
     label: string;
     htmlFor?: string;
     hint?: React.ReactNode;

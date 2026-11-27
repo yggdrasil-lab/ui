@@ -22,6 +22,7 @@ export const AutoregulationInfo: Story = {
         variant="info"
         icon="🧠"
         title="Smart Autoregulation"
+        data-testid="alert-banner-info"
       >
         Court session scheduled at 7:00 PM. Window shifted for pre-match glycogen and post-match recovery.
       </AlertBanner>
@@ -29,6 +30,7 @@ export const AutoregulationInfo: Story = {
         variant="error"
         title="Failed to load financial metrics"
         action={<Button variant="rose" size="sm">Retry</Button>}
+        data-testid="alert-banner-error"
       >
         Network connection timed out while reaching Plutus API.
       </AlertBanner>

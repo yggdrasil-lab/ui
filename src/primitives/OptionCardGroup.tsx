@@ -1,4 +1,5 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 export type OptionCardAccent = 'emerald' | 'amber' | 'orange' | 'rose' | 'blue' | 'purple';
 
@@ -10,7 +11,8 @@ export interface OptionCardItem<T extends string = string> {
   accent?: OptionCardAccent;
 }
 
-export interface OptionCardGroupProps<T extends string = string> {
+export interface OptionCardGroupProps<T extends string = string>
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   label?: string;
   options: OptionCardItem<T>[];
   value: T;
@@ -33,9 +35,10 @@ export function OptionCardGroup<T extends string = string>({
   value,
   onChange,
   className = '',
+  ...rest
 }: OptionCardGroupProps<T>) {
   return (
-    <div className={`space-y-2 ${className}`}>
+    <div className={twMerge('space-y-2', className)} {...rest}>
       {label && (
         <label className="block font-semibold text-sm text-slate-200">
           {label}

@@ -1,6 +1,6 @@
 import { default as React } from 'react';
 import { ThemeVariant } from '../theme/variants';
-export interface TactileKeypadProps {
+export interface TactileKeypadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
     value: string;
     onChange: (newValue: string) => void;
     onClear?: () => void;

@@ -1,6 +1,6 @@
 import { default as React } from 'react';
 export type AlertBannerVariant = 'info' | 'success' | 'warning' | 'error';
-export interface AlertBannerProps {
+export interface AlertBannerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
     variant?: AlertBannerVariant;
     title?: React.ReactNode;
     children?: React.ReactNode;

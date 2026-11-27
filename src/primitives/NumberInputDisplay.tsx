@@ -1,7 +1,8 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 import { THEME_VALUE_COLORS, type ThemeVariant } from '../theme/variants';
 
-export interface NumberInputDisplayProps {
+export interface NumberInputDisplayProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string;
   value: string;
   unit?: string;
@@ -17,11 +18,18 @@ export const NumberInputDisplay: React.FC<NumberInputDisplayProps> = ({
   variant = 'blue',
   valueColor,
   className = '',
+  ...rest
 }) => {
   const textColor = valueColor || THEME_VALUE_COLORS[variant] || THEME_VALUE_COLORS.blue;
 
   return (
-    <div className={`p-4 bg-background/80 rounded-2xl border border-border/80 text-center ${className}`}>
+    <div
+      className={twMerge(
+        'p-4 bg-background/80 rounded-2xl border border-border/80 text-center',
+        className
+      )}
+      {...rest}
+    >
       <span className="text-xs uppercase text-slate-400 font-semibold tracking-wider block mb-1">
         {label}
       </span>

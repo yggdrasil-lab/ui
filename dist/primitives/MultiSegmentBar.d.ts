@@ -16,7 +16,7 @@ export interface NormalizedSegmentItem extends MultiSegmentItem {
  * Pure helper that normalizes positive segment values to sum to 100% total bar width.
  */
 export declare function normalizeSegments(segments: MultiSegmentItem[]): NormalizedSegmentItem[];
-export interface MultiSegmentBarProps {
+export interface MultiSegmentBarProps extends React.HTMLAttributes<HTMLDivElement> {
     segments: MultiSegmentItem[];
     showLegend?: boolean;
     heightClass?: string;

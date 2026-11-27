@@ -6,7 +6,7 @@ export interface SegmentedControlOption<T extends string = string> {
     icon?: React.ReactNode;
     badge?: string | number;
 }
-export interface SegmentedControlProps<T extends string = string> {
+export interface SegmentedControlProps<T extends string = string> extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
     options: SegmentedControlOption<T>[];
     value: T;
     onChange: (value: T) => void;
@@ -16,4 +16,4 @@ export interface SegmentedControlProps<T extends string = string> {
     className?: string;
     idPrefix?: string;
 }
-export declare function SegmentedControl<T extends string = string>({ options, value, onChange, variant, size, fullWidth, className, idPrefix, }: SegmentedControlProps<T>): React.JSX.Element;
+export declare function SegmentedControl<T extends string = string>({ options, value, onChange, variant, size, fullWidth, className, idPrefix, style, ...rest }: SegmentedControlProps<T>): React.JSX.Element;

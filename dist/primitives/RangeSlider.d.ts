@@ -1,6 +1,6 @@
 import { default as React } from 'react';
 export type RangeSliderVariant = 'amber' | 'sky' | 'blue' | 'emerald' | 'purple';
-export interface RangeSliderProps {
+export interface RangeSliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
     label: string;
     valueDisplay: React.ReactNode;
     valueClassName?: string;

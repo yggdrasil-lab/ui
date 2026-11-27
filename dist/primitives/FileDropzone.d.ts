@@ -1,6 +1,6 @@
 import { default as React } from 'react';
 import { ThemeVariant } from '../theme/variants';
-export interface FileDropzoneProps {
+export interface FileDropzoneProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
     file: File | null;
     onFileChange: (file: File | null) => void;
     acceptedFormats?: string;
